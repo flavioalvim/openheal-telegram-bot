@@ -2,23 +2,37 @@ const env = require ('../.env')
 const Telegraf = require('telegraf')
 const bot = new Telegraf (env.token)
 const Keyboard = require('./components/keyboard')
+const KeyboardFromArray = require('./components/keyboard')
 
-const opcoes_menu_principal = [
-    {text : "grace", action : "grace"},
-    {text : "crusade", action : "crusade"},
-    {text : "heart", action : "heart"}
+// const texts = ["grace", "crusade", "heart"]
+// const opcoes_menu_principal = texts.map(item => ({text:item, action:item}))
+// const k = new Keyboard (opcoes_menu_principal,3)
+
+const k = new KeyboardFromArray(["grace", "crusade", "heart"],3)
+
+
+// const opcoes_menu_grace = [
+//     {text:"age", action:"age"},
+//     {text:"creatinina", action:"creatinina"},
+//     {text:"hematocrito", action:"hematocrito"},
+//     {text:"pcr", action:"pcr"}
+// ]
+//const g = new Keyboard (opcoes_menu_grace,2)
+
+const commands = [
+{
+    command: "grace", 
+    callBack : async(ctx,next)=>{await ctx.reply("Estamos em grace", k)}
+},
+{
+    command: "crusade", 
+    callBack : async(ctx,next)=>{await ctx.reply("Estamos em crusade", k)}
+},
+{
+    command: "heart", 
+    callBack : async(ctx,next)=>{await ctx.reply("Estamos em heart", k)}
+}
 ]
-const k = new Keyboard (opcoes_menu_principal,1)
-
-
-
-const opcoes_menu_grace = [
-    {text:"age", action:"age"},
-    {text:"creatinina", action:"creatinina"},
-    {text:"hematocrito", action:"hematocrito"},
-    {text:"pcr", action:"pcr"}
-]
-const g = new Keyboard (opcoes_menu_grace,2)
 
 
 bot.start(ctx =>{ 
@@ -27,9 +41,8 @@ bot.start(ctx =>{
 })
 
 
-
-bot.command("grace", async(ctx,next)=>{
-    await ctx.reply("Estamos em grace", g)
+commands.forEach(({command, callBack})=>{
+    bot.command(command,callBack)
 })
 
 bot.on('text', async(ctx, next)=>{
@@ -37,14 +50,14 @@ bot.on('text', async(ctx, next)=>{
 })
 
 bot.action("grace", ctx=>{
-    ctx.reply("Estamos em grace", g)
+    ctx.reply("Estamos em grace", k)
 })
 
 bot.action("crusade", ctx=>{
-    ctx.reply("Estamos em crusade")
+    ctx.reply("Estamos em crusade",k)
 })
 bot.action("heart", ctx=>{
-    ctx.reply("Estamos em heart")
+    ctx.reply("Estamos em heart",k)
 })
 
 

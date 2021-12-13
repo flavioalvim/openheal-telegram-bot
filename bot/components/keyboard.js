@@ -28,8 +28,19 @@ class Keyboard {
 
         return keyboard
     }
+
 }
 
-module.exports = Keyboard
+class KeyboardFromArray{
+    constructor (array, columns =1){
+        this.buttons_obj = array.map(item => ({text:item, action:item}))
+        //console.log(this.buttons_obj)
+        this.columns = columns
+        return new Keyboard (this.buttons_obj, this.columns)
+    }
+}
+
+module.exports = KeyboardFromArray
+
 
 
