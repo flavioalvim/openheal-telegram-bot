@@ -1,28 +1,24 @@
 const env = require ('../.env')
 const Telegraf = require('telegraf')
 const bot = new Telegraf (env.token)
-const Keyboard = require('./components/keyboard')
-const KeyboardFromArray = require('./components/keyboard')
-
-// const texts = ["grace", "crusade", "heart"]
-// const opcoes_menu_principal = texts.map(item => ({text:item, action:item}))
-// const k = new Keyboard (opcoes_menu_principal,3)
+const {Keyboard} = require('./components/keyboard')
+const {KeyboardFromArray} = require('./components/keyboard')
 
 const k = new KeyboardFromArray(["grace", "crusade", "heart"],3)
 
 
-// const opcoes_menu_grace = [
-//     {text:"age", action:"age"},
-//     {text:"creatinina", action:"creatinina"},
-//     {text:"hematocrito", action:"hematocrito"},
-//     {text:"pcr", action:"pcr"}
-// ]
-//const g = new Keyboard (opcoes_menu_grace,2)
+const opcoes_menu_grace = [
+    {text:"age", action:"age"},
+    {text:"creatinina", action:"creatinina"},
+    {text:"hematocrito", action:"hematocrito"},
+    {text:"pcr", action:"pcr"}
+]
+const g = new Keyboard (opcoes_menu_grace,2)
 
 const commands = [
 {
     command: "grace", 
-    callBack : async(ctx,next)=>{await ctx.reply("Estamos em grace", k)}
+    callBack : async(ctx,next)=>{await ctx.reply("Estamos em grace", g)}
 },
 {
     command: "crusade", 
