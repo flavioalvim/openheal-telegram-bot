@@ -1,34 +1,57 @@
 const env = require ('../.env')
 const Telegraf = require('telegraf')
 const bot = new Telegraf (env.token)
-const {Keyboard} = require('./components/keyboard')
-const {KeyboardFromArray} = require('./components/keyboard')
-
-const k = new KeyboardFromArray(["grace", "crusade", "heart"],3)
+const {Keyboard, KeyboardFromArray} = require('./components/keyboard')
+const {graceMiddleware,crusadeMiddleware,heartMiddleware,dutyScaleMiddleware} = require ('./middlewares')
 
 
-const opcoes_menu_grace = [
-    {text:"age", action:"age"},
-    {text:"creatinina", action:"creatinina"},
-    {text:"hematocrito", action:"hematocrito"},
-    {text:"pcr", action:"pcr"}
-]
-const g = new Keyboard (opcoes_menu_grace,2)
+const k = new KeyboardFromArray(["grace", "crusade", "heart", "escala"],3)
+
 
 const commands = [
 {
     command: "grace", 
-    callBack : async(ctx,next)=>{await ctx.reply("Estamos em grace", g)}
+    callBack : graceMiddleware(k)
 },
 {
     command: "crusade", 
-    callBack : async(ctx,next)=>{await ctx.reply("Estamos em crusade", k)}
+    callBack : crusadeMiddleware(k)
 },
 {
     command: "heart", 
-    callBack : async(ctx,next)=>{await ctx.reply("Estamos em heart", k)}
+    callBack : heartMiddleware(k)
+},
+{
+    command: "escalas", 
+    callBack : dutyScaleMiddleware(k)
 }
 ]
+
+commands.forEach(({command, callBack})=>{
+    bot.command(command,callBack)
+})
+
+const actions = [
+    {
+        action : "grace",
+        callback: graceMiddleware()
+    },
+    {
+        action : "crusade",
+        callback: ctx=>{
+        ctx.reply("Estamos em crusade action", k)}
+    },
+    {
+        action : "heart",
+        callback: ctx=>{
+        ctx.reply("Estamos em heart action", k)}
+    }
+]
+
+actions.forEach(({action,callback}) => {
+    bot.action(action,callback)
+})
+
 
 
 bot.start(ctx =>{ 
@@ -37,24 +60,14 @@ bot.start(ctx =>{
 })
 
 
-commands.forEach(({command, callBack})=>{
-    bot.command(command,callBack)
-})
+
 
 bot.on('text', async(ctx, next)=>{
-    await ctx.reply('Escolha uma das opçoes abaixo', k)
-})
 
-bot.action("grace", ctx=>{
-    ctx.reply("Estamos em grace", k)
+    const finalText = commands
+        .map(item => item.command)
+        .reduce((acc,item)=> (`${acc}\n /${item}`),"Escolha uma opção abaixo :")
+    ctx.reply(finalText)
 })
-
-bot.action("crusade", ctx=>{
-    ctx.reply("Estamos em crusade",k)
-})
-bot.action("heart", ctx=>{
-    ctx.reply("Estamos em heart",k)
-})
-
 
 bot.startPolling()
