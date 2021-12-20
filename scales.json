@@ -1,0 +1,90 @@
+[
+    {
+        "specialty":"ecocardiograma",
+        "telephones":[
+            {
+                "nome": "Ana Leticia",
+                "telefone": "99333-1160",
+                "id": 1
+            },
+            {
+                "nome": "Carlos",
+                "telefone": "98153-0765",
+                "id": 2
+            },
+            {
+                "nome": "Cinara",
+                "telefone": "96780-7277",
+                "id": 3
+            },
+            {
+                "nome": "Daniel",
+                "telefone": "98229-2929",
+                "id": 4
+            },
+            {
+                "nome": "Daniela",
+                "telefone": "97699-9201",
+                "id": 5
+            },
+            {
+                "nome": "Juciara",
+                "telefone": "98181-2579",
+                "id": 6
+            },
+            {
+                "nome": "Leonardo",
+                "telefone": "02498147-6155",
+                "id": 7
+            },
+            {
+                "nome": "Priscilla",
+                "telefone": "99772-7702",
+                "id": 8
+            },
+            {
+                "nome": "Roberto",
+                "telefone": "99853-4211",
+                "id": 9
+            },
+            {
+                "nome": "Rodrigo",
+                "telefone": "99957-3054",
+                "id": 10
+            },
+            {
+                "nome": "Taciana",
+                "telefone": "99667-8800",
+                "id": 11
+            },
+            {
+                "username": "Robson Fernandes",
+                "email": "robson.fernandes@gmail.com.br",
+                "password": "etdsmndr",
+                "id": 12
+            },
+            {
+                "username": "Robson Fernandes",
+                "email": "robson.fernandes@gmail.com.br",
+                "password": "etdsmndr",
+                "id": 13
+            }
+        ]
+    },
+    {
+        "specialty":"ortopedia",
+        "telephones":[]
+    },
+    {
+        "specialty":"cirurgia geral",
+        "telephones":[]
+    },
+    {
+        "specialty":"clinica médica",
+        "telephones":[]
+    },
+    {
+        "specialty":"cardiologia",
+        "telephones":[]
+    }
+]

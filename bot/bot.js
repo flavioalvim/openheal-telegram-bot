@@ -2,28 +2,34 @@ const env = require ('../.env')
 const Telegraf = require('telegraf')
 const bot = new Telegraf (env.token)
 const {Keyboard, KeyboardFromArray} = require('./components/keyboard')
-const {graceMiddleware,crusadeMiddleware,heartMiddleware,dutyScaleMiddleware} = require ('./middlewares')
-
+const {graceMiddleware,crusadeMiddleware,heartMiddleware,dutyScaleMiddleware,dutyScaleScene} = require ('./middlewares')
+const Stage = require ('telegraf/stage')
+const session = require ('telegraf/session')
+const {enter, leave} = Stage
 
 const k = new KeyboardFromArray(["grace", "crusade", "heart", "escala"],3)
+const k1 = new KeyboardFromArray(["grace", "crusade", "heart", "escala","voltar"],3)
 
+const stage = new Stage([dutyScaleScene])
+bot.use(session())
+bot.use(stage.middleware())
 
 const commands = [
 {
     command: "grace", 
-    callBack : graceMiddleware(k)
+    callBack : graceMiddleware(k1)
 },
 {
     command: "crusade", 
-    callBack : crusadeMiddleware(k)
+    callBack : crusadeMiddleware(k1)
 },
 {
     command: "heart", 
-    callBack : heartMiddleware(k)
+    callBack : heartMiddleware(k1)
 },
 {
     command: "escalas", 
-    callBack : dutyScaleMiddleware(k)
+    callBack : enter('dutyScaleScene')
 }
 ]
 
@@ -34,17 +40,19 @@ commands.forEach(({command, callBack})=>{
 const actions = [
     {
         action : "grace",
-        callback: graceMiddleware()
+        callback: graceMiddleware(k1)
     },
     {
         action : "crusade",
-        callback: ctx=>{
-        ctx.reply("Estamos em crusade action", k)}
+        callback: crusadeMiddleware(k1)
     },
     {
         action : "heart",
-        callback: ctx=>{
-        ctx.reply("Estamos em heart action", k)}
+        callback: heartMiddleware(k1)
+    },
+    {
+        action: "escala",
+        callback: enter('dutyScaleScene')
     }
 ]
 
@@ -60,14 +68,12 @@ bot.start(ctx =>{
 })
 
 
-
-
 bot.on('text', async(ctx, next)=>{
 
     const finalText = commands
         .map(item => item.command)
         .reduce((acc,item)=> (`${acc}\n /${item}`),"Escolha uma opção abaixo :")
-    ctx.reply(finalText)
+    ctx.reply(finalText,k)
 })
 
 bot.startPolling()
