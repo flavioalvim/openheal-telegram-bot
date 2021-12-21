@@ -12,8 +12,8 @@ const buttons = [...specialties, "sair"] // Array of Objects
 
 
 const k = new KeyboardFromArray(buttons) //Keboard
-const returnButton = new KeyboardFromArray(["Voltar"])
-const scaleEchoButtons = new Keyboard([
+const returnKeyboard = new KeyboardFromArray(["Voltar"])
+const scaleEchoKeyboard = new Keyboard([
     { 
         text : "Ver escala",
         action: "Ver escala ecocardiograma"
@@ -22,17 +22,16 @@ const scaleEchoButtons = new Keyboard([
         text : "Voltar",
         action: "Voltar"
     }], 1)
-const scaleOrthopedicsButtons = new Keyboard ([
-    { 
-        text : "Ver escala",
-        action: "Ver escala ortopedia"
-    },
-    {
-        text : "Voltar",
-        action: "Voltar"
-    }], 1)
+const scaleOrthopedicsButtons = new KeyboardFromArray([ "Mão", "Ombro e cotovelo", "Quadril", "Joelho", "Pé e tornozelo", "Coluna", "Politrauma e diáfises"], 1)
 
 
+const keyboarOptions  = {
+    "ecocardiograma" : scaleEchoKeyboard,
+    "ortopedia" : scaleOrthopedicsButtons
+}
+
+const getCorrectKeyboard = (specialty) => keyboarOptions[specialty]?keyboarOptions[specialty]:null
+console.log ()
 const getSpecialties = () => specialties.reduce((acc,item)=>(`${acc} \n /${item}`),"Essas são as escalas de sobreaviso:") //String
 const getScaleText = (specialty) => db
     .filter(item => item.specialty == specialty)
@@ -46,8 +45,8 @@ dutyScaleScene.leave(ctx=>ctx.reply("Saindo do mudulo escala. Digite algo para n
 const regularCommands = db.map(({specialty, professionals}) =>({
     command: specialty,
     callBack: (ctx)=>{
-        const telephonesText = professionals.reduce((acc,{name, telephone}) => (`${acc}\n${name} - ${telephone}`), `Lista de telefones - ${specialty}\n`)
-        ctx.reply(telephonesText,scaleEchoButtons)}
+        const telephonesText = professionals.reduce((acc,{name, telephone}) => (`${acc}\n${name} - ${telephone}\n`), `Lista de telefones - ${specialty}\n`)
+        ctx.reply(telephonesText, getCorrectKeyboard(specialty))}
 })) //Array of Objects
 
 const extraCommands = [
@@ -61,11 +60,11 @@ const extraCommands = [
     },
     {
         command: "Ver escala ecocardiograma",
-        callBack: (ctx)=>ctx.reply(getScaleText("ecocardiograma"),returnButton)
+        callBack: (ctx)=>ctx.reply(getScaleText("ecocardiograma"),returnKeyboard)
     },
     {
         command: "Ver escala ortopedia",
-        callBack: (ctx)=>ctx.reply(getScaleText("ortopedia"),returnButton)
+        callBack: (ctx)=>ctx.reply(getScaleText("ortopedia"),returnKeyboard)
     }
 ] // Array of objects
 
@@ -80,10 +79,8 @@ dutyScaleScene.on('message', ctx=>ctx.reply(getSpecialties(),k))
 const regularActions = db.map(({specialty, professionals}) =>({
     action: specialty,
     callBack: (ctx)=>{
-        //console.log (professionals)
-        const telephonesText = professionals.reduce((acc,item) => (`${acc}\n${item.name} - ${item.telephone}`), `Lista de telefones - ${specialty}\n`)
-        //console.log(telephonesText)
-        ctx.reply(telephonesText,scaleEchoButtons)}
+        const telephonesText = professionals.reduce((acc,item) => (`${acc}\n${item.name} - ${item.telephone}\n`), `Lista de telefones - ${specialty}\n`)
+        ctx.reply(telephonesText,getCorrectKeyboard(specialty))}
 })) //Array of Objects
 //console.log(regularActions)
 
@@ -98,12 +95,13 @@ const ExtraActions =[
     },
     {
         action: "Ver escala ecocardiograma",
-        callBack: (ctx)=>ctx.reply(getScaleText("ecocardiograma"),returnButton)
+        callBack: (ctx)=>ctx.reply(getScaleText("ecocardiograma"),returnKeyboard)
     },
     {
-        action: "Ver escala ortopedia",
-        callBack: (ctx)=>ctx.reply(getScaleText("ortopedia"),returnButton)
+        action: "Mão",
+        callBack: (ctx)=>ctx.reply("Aqui vai a mao",returnKeyboard)
     }
+
 ]
 
 const actions = [...regularActions,...ExtraActions]

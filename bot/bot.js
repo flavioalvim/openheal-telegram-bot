@@ -7,8 +7,8 @@ const Stage = require ('telegraf/stage')
 const session = require ('telegraf/session')
 const {enter, leave} = Stage
 
-const k = new KeyboardFromArray(["grace", "crusade", "heart", "escala"],3)
-const k1 = new KeyboardFromArray(["grace", "crusade", "heart", "escala","voltar"],3)
+const k = new KeyboardFromArray(["escala"],3)
+const k1 = new KeyboardFromArray(["escala","voltar"],3)
 
 const stage = new Stage([dutyScaleScene])
 bot.use(session())
@@ -16,40 +16,15 @@ bot.use(stage.middleware())
 
 const commands = [
 {
-    command: "grace", 
-    callBack : graceMiddleware(k1)
-},
-{
-    command: "crusade", 
-    callBack : crusadeMiddleware(k1)
-},
-{
-    command: "heart", 
-    callBack : heartMiddleware(k1)
-},
-{
     command: "escalas", 
     callBack : enter('dutyScaleScene')
-}
-]
+}]
 
 commands.forEach(({command, callBack})=>{
     bot.command(command,callBack)
 })
 
 const actions = [
-    {
-        action : "grace",
-        callback: graceMiddleware(k1)
-    },
-    {
-        action : "crusade",
-        callback: crusadeMiddleware(k1)
-    },
-    {
-        action : "heart",
-        callback: heartMiddleware(k1)
-    },
     {
         action: "escala",
         callback: enter('dutyScaleScene')
