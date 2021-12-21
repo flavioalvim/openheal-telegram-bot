@@ -1,90 +1,238 @@
 [
     {
         "specialty":"ecocardiograma",
-        "telephones":[
+        "professionals":[
             {
-                "nome": "Ana Leticia",
-                "telefone": "99333-1160",
+                "name": "Ana Leticia",
+                "telephone": "99333-1160",
                 "id": 1
             },
             {
-                "nome": "Carlos",
-                "telefone": "98153-0765",
+                "name": "Carlos",
+                "telephone": "98153-0765",
                 "id": 2
             },
             {
-                "nome": "Cinara",
-                "telefone": "96780-7277",
+                "name": "Cinara",
+                "telephone": "96780-7277",
                 "id": 3
             },
             {
-                "nome": "Daniel",
-                "telefone": "98229-2929",
+                "name": "Daniel",
+                "telephone": "98229-2929",
                 "id": 4
             },
             {
-                "nome": "Daniela",
-                "telefone": "97699-9201",
+                "name": "Daniela",
+                "telephone": "97699-9201",
                 "id": 5
             },
             {
-                "nome": "Juciara",
-                "telefone": "98181-2579",
+                "name": "Juciara",
+                "telephone": "98181-2579",
                 "id": 6
             },
             {
-                "nome": "Leonardo",
-                "telefone": "02498147-6155",
+                "name": "Leonardo",
+                "telephone": "02498147-6155",
                 "id": 7
             },
             {
-                "nome": "Priscilla",
-                "telefone": "99772-7702",
+                "name": "Priscilla",
+                "telephone": "99772-7702",
                 "id": 8
             },
             {
-                "nome": "Roberto",
-                "telefone": "99853-4211",
+                "name": "Roberto",
+                "telephone": "99853-4211",
                 "id": 9
             },
             {
-                "nome": "Rodrigo",
-                "telefone": "99957-3054",
+                "name": "Rodrigo",
+                "telephone": "99957-3054",
                 "id": 10
             },
             {
-                "nome": "Taciana",
-                "telefone": "99667-8800",
+                "name": "Taciana",
+                "telephone": "99667-8800",
                 "id": 11
-            },
-            {
-                "username": "Robson Fernandes",
-                "email": "robson.fernandes@gmail.com.br",
-                "password": "etdsmndr",
-                "id": 12
-            },
-            {
-                "username": "Robson Fernandes",
-                "email": "robson.fernandes@gmail.com.br",
-                "password": "etdsmndr",
-                "id": 13
             }
-        ]
+        ],
+        "scaleText":"Segunda - Taciana\nTerça - Rodrigo\nQuarta - Roberto"
     },
     {
         "specialty":"ortopedia",
-        "telephones":[]
+        "professionals":[
+            {
+              "name": "André Teixeira",
+              "telephone": "99113-4151",
+              "subSpecialty": [
+                "mão"
+              ],
+              "teamProfessionals": [],
+              "id" : 1  
+            },
+            {
+              "name": "Henrique Barros",
+              "telephone": "99982-2178",
+              "subSpecialty": [
+                "mão"
+              ],
+              "teamProfessionals": [],
+              "id" : 2
+            },
+            {
+              "name": "Christiano Cinelli",
+              "telephone": "97220-6120",
+              "subSpecialty": [
+                "ombro",
+                "cotovelo"
+              ],
+              "teamProfessionals": [],
+              "id" : 3
+            },
+            {
+              "name": "Marcelo Campos",
+              "telephone": "99989-2920",
+              "subSpecialty": [
+                "ombro",
+                "cotovelo"
+              ],
+              "teamProfessionals": [],
+              "id" : 4
+            },
+            {
+              "name": "Sergio Delmonte",
+              "telephone": "99965-8415",
+              "subSpecialty": [
+                "quadril"
+              ],
+              "teamProfessionals": [],
+              "id": 5
+            },
+            {
+              "name": "Jorge Penedo",
+              "telephone": "98111-5003",
+              "subSpecialty": [
+                "quadril"
+              ],
+              "teamProfessionals": [],
+              "id" : 6
+            },
+            {
+              "name": "Daniel Rosa",
+              "telephone": "98805-8433",
+              "subSpecialty": [
+                "joelho"
+              ],
+              "teamProfessionals": [],
+              "id" : 7
+            },
+            {
+              "name": "Joao Mauricio",
+              "telephone": "99973-5763",
+              "subSpecialty": [
+                "joelho"
+              ],
+              "teamProfessionals": [],
+              "id" : 8
+            },
+            {
+              "name": "Vitor Miranda",
+              "telephone": "99295-5529",
+              "subSpecialty": [
+                "pé",
+                "tornozelo"
+              ],
+              "teamProfessionals": [],
+              "id" : 9
+            },
+            {
+              "name": "Jose Carlos Cohen",
+              "telephone": "99643-1841",
+              "subSpecialty": [
+                "pé",
+                "tornozelo"
+              ],
+              "teamProfessionals": [],
+              "id" : 10
+            },
+            {
+              "name": "Sergio Gurgel",
+              "telephone": "999999-8605",
+              "subSpecialty": [
+                "coluna"
+              ],
+              "teamProfessionals": [],
+              "id" : 11
+            },
+            {
+              "name": "Flavio Cavallari",
+              "telephone": "99985-4402",
+              "subSpecialty": [
+                "coluna"
+              ],
+              "teamProfessionals": [],
+              "id" : 12
+            },
+            {
+              "name": "Tito Rocha",
+              "telephone": "97281-6408",
+              "subSpecialty": [
+                "politrauma",
+                "diáfises"
+              ],
+              "teamProfessionals": [],
+              "id" : 13
+            },
+            {
+              "name": "Vincenzo Giordano",
+              "telephone": "99751-6859",
+              "subSpecialty": [
+                "politrauma",
+                "diáfises"
+              ],
+              "teamProfessionals": [],
+              "id" : 14
+            },
+            {
+              "name": "Marcus Calixto",
+              "telephone": "98635-5936",
+              "subSpecialty": [
+                "coluna"
+              ],
+              "teamProfessionals": [
+                "Sergio Gurgel"
+              ],
+              "id" : 14
+            },
+            {
+              "name": "Fernando Ribeiro",
+              "telephone": "98799-0070",
+              "subSpecialty": [
+                "coluna"
+              ],
+              "teamProfessionals": [
+                "Sergio Gurgel"
+              ],
+              "id" : 15
+            }
+          ],
+        "scaleText": "Aqui colocaremos o texto da escala da ortopedia"
     },
     {
         "specialty":"cirurgia geral",
-        "telephones":[]
+        "professionals":[],
+        "scaleText": ""
     },
     {
         "specialty":"clinica médica",
-        "telephones":[]
+        "professionals":[],
+        "scaleText": ""
     },
     {
         "specialty":"cardiologia",
-        "telephones":[]
+        "professionals":[],
+        "scaleText": ""
     }
 ]
