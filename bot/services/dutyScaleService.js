@@ -1,6 +1,6 @@
 const fs = require('fs')
 const Stage = require ('telegraf/stage')
-const {enter, leave} = Stage
+const {leave} = Stage
 const {KeyboardFromArray, Keyboard} = require ('../components/keyboard')
 
 const getDataBase = () => JSON.parse(fs.readFileSync ('../scales.json')) //Json
@@ -77,12 +77,6 @@ const getMainScene = ctx => ctx.reply(getSpecialtiesScales(), getCorrectKeyboard
 const getScaleText = (specialty) => getDataBase()
     .filter(item => item.specialty == specialty)
     .map (item => item.scaleText).toString() // String de objetos filtrados
-
-
-
-
-//const getScaleOrthopedicsKeyboardObject = () => [ "Mão", "Ombro e cotovelo", "Quadril", "Joelho", "Pé e tornozelo", "Coluna", "Politrauma e diáfises"]
-
 
 
 

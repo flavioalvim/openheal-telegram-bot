@@ -1,7 +1,5 @@
 const Scene = require ('telegraf/scenes/base')
-const Stage = require ('telegraf/stage')
-const {enter, leave} = Stage
-const fs = require('fs')
+
 const {
     getDataBase, 
     getExtraCommandsAndActionsObject,
