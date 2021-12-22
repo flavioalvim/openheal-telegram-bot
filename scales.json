@@ -1,6 +1,6 @@
 [
     {
-        "specialty":"ecocardiograma",
+        "specialty":"Ecocardiograma",
         "professionals":[
             {
                 "name": "Ana Leticia",
@@ -61,7 +61,7 @@
         "scaleText":"Segunda - Taciana\nTerça - Rodrigo\nQuarta - Roberto"
     },
     {
-        "specialty":"ortopedia",
+        "specialty":"Ortopedia",
         "professionals":[
             {
               "name": "André Teixeira",

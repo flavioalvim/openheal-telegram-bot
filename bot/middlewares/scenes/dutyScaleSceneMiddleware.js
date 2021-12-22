@@ -1,13 +1,11 @@
 const Scene = require ('telegraf/scenes/base')
 
-const {
-    getDb, 
-    getExtraCommandsAndActionsObject,
-    getCorrectKeyboard,getMainScene} = require ('../../services/dutyScaleService')
+const  {db, getCorrectKeyboard} = require ('../../services/dutyScale')
+const  {getExtraCommandsAndActionsObject, getMainScene} = require ('../../services/dutyScale/dutyScaleService')
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene
 
-const regularCommandsAndActions = getDb().map(({specialty, professionals}) =>({
+const regularCommandsAndActions = db().map(({specialty, professionals}) =>({
     command: specialty,
     action :specialty,
     callBack: (ctx)=>{
