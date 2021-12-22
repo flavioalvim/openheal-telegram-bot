@@ -1,20 +1,12 @@
 const Scene = require ('telegraf/scenes/base')
 
 const  {db, getCorrectKeyboard} = require ('../../services/dutyScale')
-const  {getExtraCommandsAndActionsObject, getMainScene} = require ('../../services/dutyScale/dutyScaleService')
+const  {getExtraCommandsAndActionsObject, getMainScene, getRegularCommandsAndActionsObject} = require ('../../services/dutyScale/services')
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene
 
-const regularCommandsAndActions = db().map(({specialty, professionals}) =>({
-    command: specialty,
-    action :specialty,
-    callBack: (ctx)=>{
-        const telephonesText = professionals.reduce((acc,{name, telephone}) => (`${acc}\n${name} - ${telephone}\n`), `Lista de telefones - ${specialty}\n`)
-        ctx.reply(telephonesText, getCorrectKeyboard(specialty))}
-})) //Array of Objects
-
-const extraCommandsAndActions = getExtraCommandsAndActionsObject()
-    
+const regularCommandsAndActions = getRegularCommandsAndActionsObject()
+const extraCommandsAndActions = getExtraCommandsAndActionsObject()  
 const commandsAndActions = [...regularCommandsAndActions, ...extraCommandsAndActions]
 
 
