@@ -36,7 +36,7 @@ const getScaleText = (specialty) =>
     Sábado:  Andre Teixeira 
     Domingo: Sergio Gurgel`
 
-    return textsOptions[specialtY]| "Ops"
+    return textsOptions[specialty]| "Ops"
 }
 
 module.exports = getScaleText

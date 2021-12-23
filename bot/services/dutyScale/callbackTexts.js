@@ -17,7 +17,8 @@ const getSubSpecialtyTelephonesText = (specialty, subSpecialty,keyboard) => {
         .map(item => item.professionals)
         .reduce ((acc,item)=>[...acc, ...item],[])
         .filter(item => item.subSpecialty.includes(subSpecialty))
-        .reduce((acc, {name, telephone}) => `${acc}${name} - ${telephone}\n\n`,`${specialty} - ${subSpecialty}\n\n`)
+        .reduce((acc, {name, telephones}) => `${acc}${name} - ${telephones.reduce((acc,{telephone})=>`${acc}${telephone}\n`,"")}`,`${specialty} - ${subSpecialty}\n\n`)
+
 
         return (ctx) => ctx.reply(text, keyboard)
 }
