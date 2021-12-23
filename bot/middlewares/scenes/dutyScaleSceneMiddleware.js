@@ -1,22 +1,20 @@
 const Scene = require ('telegraf/scenes/base')
-
-const  {db, getCorrectKeyboard} = require ('../../services/dutyScale')
-const  {getExtraCommandsAndActionsObject, getMainScene, getRegularCommandsAndActionsObject} = require ('../../services/dutyScale/services')
+const  {getExtraObject, getMainScene, getRegularObject} = require ('../../services/dutyScale')
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene
 
-const regularCommandsAndActions = getRegularCommandsAndActionsObject()
-const extraCommandsAndActions = getExtraCommandsAndActionsObject()  
-const commandsAndActions = [...regularCommandsAndActions, ...extraCommandsAndActions]
+const regularObject = getRegularObject()
+const extraObject = getExtraObject()  
+const commandsAndActions = [...regularObject, ...extraObject]
 
 
 dutyScaleScene.enter(getMainScene)
 dutyScaleScene.leave(ctx=>ctx.reply("Saindo do mudulo escala. Digite algo para novas opções"))
 
 
-commandsAndActions.forEach(({action , command, callBack})=>{
-    dutyScaleScene.command(command,callBack)
-    dutyScaleScene.action(action,callBack)
+commandsAndActions.forEach(({action , command, commandCallback, actionCallback})=>{
+    dutyScaleScene.command(command,commandCallback)
+    dutyScaleScene.action(action,actionCallback)
 })
 
 dutyScaleScene.on('message', getMainScene)

@@ -1,3 +1,4 @@
+const { keyboard } = require('telegraf/markup')
 const db= require('./database')
 
 
@@ -10,7 +11,7 @@ const getScaleText = (specialty) => db()
     .filter(item => item.specialty == specialty)
     .map (item => item.scaleText).toString() // String de objetos filtrados
 
-const getSubSpecialtyTelephonesText = (specialty, subSpecialty) => {
+const getSubSpecialtyTelephonesText = (specialty, subSpecialty,keyboard) => {
     const text = db()
         .filter(item => item.specialty == specialty)
         .map(item => item.professionals)
@@ -18,8 +19,10 @@ const getSubSpecialtyTelephonesText = (specialty, subSpecialty) => {
         .filter(item => item.subSpecialty.includes(subSpecialty))
         .reduce((acc, {name, telephone}) => `${acc}${name} - ${telephone}\n\n`,`${specialty} - ${subSpecialty}\n\n`)
 
-        return text
+        return (ctx) => ctx.reply(text, keyboard)
 }
 
 
-module.exports = {getSpecialtiesText, getSubSpecialtyTelephonesText, getScaleText}
+module.exports = {getSpecialtiesText, 
+    getSubSpecialtyTelephonesText, 
+    getScaleText}

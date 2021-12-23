@@ -7,7 +7,7 @@ const getCorrectKeyboard = (option) =>{
     const buttons = [...getSpecialties, "sair"] // Array of Objects
     const regularKeyboard =  new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard =  new KeyboardFromArray(["Voltar"])
-    const scaleEchoKeyboard = new Keyboard(getScaleEchoKeyboardObject(), 1)
+    const scaleEchoKeyboard = new Keyboard(getEchoKeyboardObject(), 1)
     const scaleOrthopedicsKeyboard =  new KeyboardFromArray(getSubSpecialtiesArray("Ortopedia"), 1)
     const createScaleKeybord = (action, columns) => new Keyboard([{text: "Ver escala", action:action},{text: "Voltar", action: "Voltar"}], columns) 
 
@@ -19,8 +19,7 @@ const getCorrectKeyboard = (option) =>{
         "verEscalaMao" : createScaleKeybord("mão",1) 
     }
 
-    function getScaleEchoKeyboardObject () {
-        
+    function getEchoKeyboardObject () {
         return (
 [
     { 
