@@ -2,10 +2,10 @@ const db = require ('./database')
 const getCorrectKeyboard = require('./keyboards')
 const {getSpecialtiesText,
     getSubSpecialtyTelephonesText,
-    getScaleText} = require ('./callbackTexts')
+    getScaleText,getMainScene} = require ('./callbackTexts')
 const {getRegularObject,
     getExtraObject}= require('./object')
-const getMainScene = require('./services')
+
 
 
 module.exports = {

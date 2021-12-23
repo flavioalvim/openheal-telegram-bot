@@ -14,6 +14,7 @@ const getCorrectKeyboard = (option) =>{
     const keyboardOptions  = {
         "Ecocardiograma" : scaleEchoKeyboard,
         "Ortopedia" : scaleOrthopedicsKeyboard,
+        "Urologia" : returnKeyboard,
         "regular" : regularKeyboard,
         "return" : returnKeyboard,
         "verEscalaMao" : createScaleKeybord("mão",1) 
