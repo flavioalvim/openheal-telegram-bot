@@ -1,16 +1,15 @@
 const db = require('./database')
 const Stage = require ('telegraf/stage')
 const {leave} = Stage
-const getCorrectKeyboard = require('./keyboards')
-const {getCommonCallbackText,getMainScene, getScaleText, getSubSpecialtyTelephonesTextCallback} = require ('./callbackTexts')
+const getCorrectKeyboard = require('./keyboards_old')
+const {getCommonCallback,getMainScene, getScaleCallback, getSubSpecialtyTelephonesTextCallback} = require ('./callbackTexts')
 const getSubSpecialtiesArray = require('./utils.js')
-const { get } = require('http')
 
 const getRegularObject1 = () => 
 {
     const object = db().map(({specialty}) =>
     {   
-        const commonCallback = getCommonCallbackText(specialty)
+        const commonCallback = getCommonCallback(specialty)
 
             return (
                 {
@@ -31,12 +30,12 @@ const getRegularObject2 = () => [{
     actionCallback: "commonCallback"
 }]
 
-console.log(getRegularObject2())
+//console.log(getRegularObject2())
 
 
 
 const getRegularObject = () => [...getRegularObject1(), ...getRegularObject2()]
-console.log(getRegularObject())
+//console.log(getRegularObject())
 
 const getExtraObject = ()=>
     [
@@ -54,11 +53,12 @@ const getExtraObject = ()=>
         },
         {
             command: "texto",
-            commandCallback: getScaleText,
+            commandCallback: getScaleCallback("Ecocardiograma".toLocaleLowerCase()),
             action: "texto",
-            actionCallback: getScaleText
+            actionCallback: getScaleCallback("Ecocardiograma".toLocaleLowerCase())
         }
     ]// Array of objects
+
 
 module.exports = {
     getRegularObject,

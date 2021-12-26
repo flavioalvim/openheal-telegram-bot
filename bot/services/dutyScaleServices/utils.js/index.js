@@ -17,7 +17,7 @@ const getSubSpecialtiesArray = (specialty) => {
     catch
     {
         console.log("Parece que essa especialidade nao tem subespecialidades")
-        return false
+        return []
     }}
 
     module.exports = getSubSpecialtiesArray

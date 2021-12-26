@@ -2,24 +2,13 @@ const { keyboard } = require('telegraf/markup')
 const db= require('./database')
 const getCorrectKeyboard =require ('./keyboards')
 const getSubSpecialtiesArray = require('./utils.js')
+const fs = require ('fs')
+
 
 
 const getMainScene = ctx => ctx.reply(getSpecialtiesText(), getCorrectKeyboard("regular"))
 
-// const getCommonCallbackText = (specialty) => {return ((ctx)=>
-// {   
-//     const professionals = db()
-//         .filter(item => item.specialty ==  specialty)
-//         .map(item => item.professionals)
-//         .reduce((acc,item) => ({...acc, ...item}))
-
-//     const telephonesText = professionals.reduce((acc,{name, telephones}) => (`${acc}${name} - ${telephones.reduce((acc,{telephone})=>(`${acc}${telephone}\n`),"")}\n`), `Lista de telefones - ${specialty}\n\n`)
-    
-//     ctx.reply(telephonesText, getCorrectKeyboard(specialty))
-
-//  })}
-
-const getCommonCallbackText = (specialty) => {return ((ctx)=>
+const getCommonCallback = (specialty) => {return ((ctx)=>
     {   
         
         const professionals = db()
@@ -33,8 +22,7 @@ const getCommonCallbackText = (specialty) => {return ((ctx)=>
         const subSpecialty = getSubSpecialtiesArray(specialty)
         //console.log(subSpecialty)
 
-        if(subSpecialty !== false){
-            console.log("entrou")
+        if(subSpecialty.length>0){
             const filterBySpecialty =  subSpecialty
                 .map(element => (
                     {"subSpecialty": element ,
@@ -48,19 +36,15 @@ const getCommonCallbackText = (specialty) => {return ((ctx)=>
 
             //console.log(innerText)    
 
-            ctx.replyWithMarkdown(`*Telefones - ${specialty}*\n ${innerText}`, getCorrectKeyboard(specialty))
+            ctx.replyWithMarkdown(`*Telefones - ${specialty}*\n ${innerText}`, getCorrectKeyboard("subSpecialty",specialty))
         }else{
-            console.log(professionals)
+            //console.log(professionals)
 
-            const telephonesText = professionals.reduce((acc,{name, telephones}) => `${acc}${name} - ${getTelephones(telephones)}\n`, `Lista de telefones - ${specialty}\n\n`)
+            const telephonesText = professionals.reduce((acc,{name, telephones}) => `${acc}${name} - ${getTelephones(telephones)}\n`, `*Lista de telefones - ${specialty}*\n\n`)
         
-            ctx.replyWithMarkdown(telephonesText,getCorrectKeyboard(specialty))
+            ctx.replyWithMarkdown(telephonesText,getCorrectKeyboard("seeScale"))
 
 }})}
-
-        
-
-
 
 const getSpecialtiesText = () => {
     const getSpecialties = () => db().map(item => item.specialty)
@@ -69,21 +53,15 @@ const getSpecialtiesText = () => {
 
 
 
-const getScaleText = (ctx) => {
-
-    ctx.replyWithContact("+5521992218007", "FlavioAlvim",)
-
-
-    ctx.replyWithMarkdown(`
-    #Cabeçalho#
-    ##Segunda linha##
-
-    Texto simples
-    *Negrito*
-    _Negrito_
-    [Telefone - 992218007](+5521992218007)
-    `)
+function getScaleCallback (filename) 
+{
+    return ((ctx) => {
+    const mdFile = fs.readFileSync(__dirname + '/mdFiles/'+ `${filename}.md`).toString()
+    console.log (mdFile)
+    ctx.replyWithMarkdown(mdFile,getCorrectKeyboard("return"))
+})
 }
+
 
 const getSubSpecialtyTelephonesTextCallback = (specialty, subSpecialty,keyboard) => {
     const text = db()
@@ -101,6 +79,6 @@ const getSubSpecialtyTelephonesTextCallback = (specialty, subSpecialty,keyboard)
 
 module.exports = {getSpecialtiesText, 
     getSubSpecialtyTelephonesTextCallback, 
-    getScaleText,
-    getCommonCallbackText,
+    getScaleCallback,
+    getCommonCallback,
     getMainScene}

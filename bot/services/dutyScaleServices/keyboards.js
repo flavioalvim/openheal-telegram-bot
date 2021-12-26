@@ -1,38 +1,23 @@
 const {KeyboardFromArray, Keyboard} = require ('../../components/keyboard')
 const db = require('./database')
-const getSubSpecialtiesArray = require ("./utils.js")
+const getSubSpecialtiesArray = require ("./utils.js/index.js")
 
-const getCorrectKeyboard = (option) =>{
+const getCorrectKeyboard = (option, specialty = "") =>{
 
     const getSpecialties = db().map(item => item.specialty) //Array of Objects
     const buttons = [...getSpecialties, "sair","texto"] // Array of Objects
     const regularKeyboard =  new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard =  new KeyboardFromArray(["Voltar"])
-    const scaleEchoKeyboard = new Keyboard(getEchoKeyboardObject(), 1)
-    const scaleOrthopedicsKeyboard =  new KeyboardFromArray([...getSubSpecialtiesArray("Ortopedia"),"Voltar"], 1)
-    const createScaleKeybord = (action, columns) => new Keyboard([{text: "Ver escala", action:action},{text: "Voltar", action: "Voltar"}], columns) 
+    const subSpecialtyKeyboard = new KeyboardFromArray([...getSubSpecialtiesArray(specialty),"Voltar"])
+    const seeScaleKeyboard = new Keyboard([{text:"Ver escala" , action: "padrao"},{text:"Voltar" , action: "Voltar"}],1)
 
-    const keyboardOptions  = {
-        "Ecocardiograma" : scaleEchoKeyboard,
-        "Ortopedia" : scaleOrthopedicsKeyboard,
-        "Urologia" : returnKeyboard,
+    const keyboardOptions  =  {
         "regular" : regularKeyboard,
+        "subSpecialty": subSpecialtyKeyboard,
         "return" : returnKeyboard,
-        "verEscalaMao" : createScaleKeybord("mão",1) 
+        "seeScale" : seeScaleKeyboard
+
     }
-
-    function getEchoKeyboardObject () {
-        return (
-[
-    { 
-        text : "Ver escala",
-        action: "Ver escala ecocardiograma"
-    },
-    {
-        text : "Voltar",
-        action: "Voltar"
-    }])}
-
 
     return (keyboardOptions[option])
 }
