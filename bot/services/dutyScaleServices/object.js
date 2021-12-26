@@ -2,10 +2,11 @@ const db = require('./database')
 const Stage = require ('telegraf/stage')
 const {leave} = Stage
 const getCorrectKeyboard = require('./keyboards')
-const {getSubSpecialtyTelephonesTextCallback,getCommonCallbackText,getMainScene, getScaleText} = require ('./callbackTexts')
+const {getCommonCallbackText,getMainScene, getScaleText, getSubSpecialtyTelephonesTextCallback} = require ('./callbackTexts')
+const getSubSpecialtiesArray = require('./utils.js')
+const { get } = require('http')
 
-
-const getRegularObject = () => 
+const getRegularObject1 = () => 
 {
     const object = db().map(({specialty}) =>
     {   
@@ -23,6 +24,19 @@ const getRegularObject = () =>
     return object
 }
 
+const getRegularObject2 = () => [{
+    command: "subSpecialty",
+    commandCallback :"commonCallback",
+    action :"subSpecialty",
+    actionCallback: "commonCallback"
+}]
+
+console.log(getRegularObject2())
+
+
+
+const getRegularObject = () => [...getRegularObject1(), ...getRegularObject2()]
+console.log(getRegularObject())
 
 const getExtraObject = ()=>
     [
@@ -37,42 +51,6 @@ const getExtraObject = ()=>
             commandCallback: getMainScene,
             action : "Voltar",
             actionCallback: getMainScene
-        },
-        {
-            command: "mão",
-            commandCallback: getSubSpecialtyTelephonesTextCallback("Ortopedia", "mão", getCorrectKeyboard("return")),
-            action: "mão",
-            actionCallback:getSubSpecialtyTelephonesTextCallback("Ortopedia", "mão", getCorrectKeyboard("return"))
-        },
-        {
-            command: "ombro",
-            commandCallback: getSubSpecialtyTelephonesTextCallback("Ortopedia", "ombro", getCorrectKeyboard("return")),
-            action: "ombro",
-            actionCallback:getSubSpecialtyTelephonesTextCallback("Ortopedia", "ombro", getCorrectKeyboard("return"))
-        },
-        {
-            command: "cotovelo",
-            commandCallback: getSubSpecialtyTelephonesTextCallback("Ortopedia", "cotovelo", getCorrectKeyboard("return")),
-            action: "cotovelo",
-            actionCallback:getSubSpecialtyTelephonesTextCallback("Ortopedia", "cotovelo", getCorrectKeyboard("return"))
-        },
-        {
-            command: "quadril",
-            commandCallback: getSubSpecialtyTelephonesTextCallback("Ortopedia", "quadril", getCorrectKeyboard("return")),
-            action: "quadril",
-            actionCallback:getSubSpecialtyTelephonesTextCallback("Ortopedia", "quadril", getCorrectKeyboard("return"))
-        },
-        {
-            command: "joelho",
-            commandCallback: getSubSpecialtyTelephonesTextCallback("Ortopedia", "joelho", getCorrectKeyboard("return")),
-            action: "joelho",
-            actionCallback:getSubSpecialtyTelephonesTextCallback("Ortopedia", "joelho", getCorrectKeyboard("return"))
-        },
-        {
-            command: "pé",
-            commandCallback: getSubSpecialtyTelephonesTextCallback("Ortopedia", "pé", getCorrectKeyboard("return")),
-            action: "pé",
-            actionCallback:getSubSpecialtyTelephonesTextCallback("Ortopedia", "pé", getCorrectKeyboard("return"))
         },
         {
             command: "texto",
