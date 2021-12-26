@@ -7,10 +7,10 @@ const {getSubSpecialtyTelephonesTextCallback,getCommonCallbackText,getMainScene,
 
 const getRegularObject = () => 
 {
-    const object = db().map(({specialty, professionals}) =>
-    {
-        const commonCallback = getCommonCallbackText(specialty, professionals)
-    
+    const object = db().map(({specialty}) =>
+    {   
+        const commonCallback = getCommonCallbackText(specialty)
+
             return (
                 {
                     command: specialty,

@@ -4,52 +4,52 @@
         "professionals":[
             {
                 "name": "Ana Leticia",
-                "telephones":[{"telephone":"99333-1160"}],
+                "telephones":[{"telephone":"+5521993331160"}],
                 "id": 1
             },
             {
                 "name": "Carlos",
-                "telephones": [{"telephone":"98153-0765"}],
+                "telephones": [{"telephone":"+552198153-0765"}],
                 "id": 2
             },
             {
                 "name": "Cinara",
-                "telephones": [{"telephone":"96780-7277"}],
+                "telephones": [{"telephone":"+552196780-7277"}],
                 "id": 3
             },
             {
                 "name": "Daniel",
-                "telephones": [{"telephone":"98229-2929"}],
+                "telephones": [{"telephone":"+552198229-2929"}],
                 "id": 4
             },
             {
                 "name": "Daniela",
-                "telephones": [{"telephone":"97699-9201"}],
+                "telephones": [{"telephone":"+552197699-9201"}],
                 "id": 5
             },
             {
                 "name": "Juciara",
-                "telephones": [{"telephone":"98181-2579"}],
+                "telephones": [{"telephone":"+552198181-2579"}],
                 "id": 6
             },
             {
                 "name": "Leonardo",
-                "telephones": [{"telephone":"02498147-6155"}],
+                "telephones": [{"telephone":"+552498147-6155"}],
                 "id": 7
             },
             {
                 "name": "Priscilla",
-                "telephones": [{"telephone":"99772-7702"}],
+                "telephones": [{"telephone":"+552199772-7702"}],
                 "id": 8
             },
             {
                 "name": "Roberto",
-                "telephones": [{"telephone":"99853-4211"}],
+                "telephones": [{"telephone":"+552199853-4211"}],
                 "id": 9
             },
             {
                 "name": "Rodrigo",
-                "telephones": [{"telephone":"99957-3054"}],
+                "telephones": [{"telephone":"+552199957-3054"}],
                 "id": 11
             }
         ],
@@ -60,141 +60,141 @@
         "professionals":[
             {
               "name": "André Teixeira",
-              "telephones": [{"telephone":"99113-4151"}],
+              "telephones": [{"telephone":"+552199113-4151"}],
               "subSpecialty": [
-                "mão"
+                "Mão"
               ],
               "teamProfessionals": [],
               "id" : 1  
             },
             {
               "name": "Henrique Barros",
-              "telephones": [{"telephone":"99982-2178"}],
+              "telephones": [{"telephone":"+552199982-2178"}],
               "subSpecialty": [
-                "mão"
+                "Mão"
               ],
               "teamProfessionals": [],
               "id" : 2
             },
             {
               "name": "Christiano Cinelli",
-              "telephones": [{"telephone":"97220-6120"}],
+              "telephones": [{"telephone":"+552197220-6120"}],
               "subSpecialty": [
-                "ombro",
-                "cotovelo"
+                "Ombro",
+                "Cotovelo"
               ],
               "teamProfessionals": [],
               "id" : 3
             },
             {
               "name": "Marcelo Campos",
-              "telephones": [{"telephone":"99989-2920"}],
+              "telephones": [{"telephone":"+552199989-2920"}],
               "subSpecialty": [
-                "ombro",
-                "cotovelo"
+                "Ombro",
+                "Cotovelo"
               ],
               "teamProfessionals": [],
               "id" : 4
             },
             {
               "name": "Sergio Delmonte",
-              "telephones": [{"telephone":"99965-8415"}],
+              "telephones": [{"telephone":"+552199965-8415"}],
               "subSpecialty": [
-                "quadril"
+                "Quadril"
               ],
               "teamProfessionals": [],
               "id": 5
             },
             {
               "name": "Jorge Penedo",
-              "telephones": [{"telephone":"98111-5003"}],
+              "telephones": [{"telephone":"+552198111-5003"}],
               "subSpecialty": [
-                "quadril"
+                "Quadril"
               ],
               "teamProfessionals": [],
               "id" : 6
             },
             {
               "name": "Daniel Rosa",
-              "telephones": [{"telephone":"98805-8433"}],
+              "telephones": [{"telephone":"+552198805-8433"}],
               "subSpecialty": [
-                "joelho"
+                "Joelho"
               ],
               "teamProfessionals": [],
               "id" : 7
             },
             {
               "name": "Joao Mauricio",
-              "telephones": [{"telephone":"99973-5763"}],
+              "telephones": [{"telephone":"+552199973-5763"}],
               "subSpecialty": [
-                "joelho"
+                "Joelho"
               ],
               "teamProfessionals": [],
               "id" : 8
             },
             {
               "name": "Vitor Miranda",
-              "telephones": [{"telephone":"99295-5529"}],
+              "telephones": [{"telephone":"+552199295-5529"}],
               "subSpecialty": [
-                "pé",
-                "tornozelo"
+                "Pé",
+                "Tornozelo"
               ],
               "teamProfessionals": [],
               "id" : 9
             },
             {
               "name": "Jose Carlos Cohen",
-              "telephones": [{"telephone":"99643-1841"}],
+              "telephones": [{"telephone":"+552199643-1841"}],
               "subSpecialty": [
-                "pé",
-                "tornozelo"
+                "Pé",
+                "Tornozelo"
               ],
               "teamProfessionals": [],
               "id" : 10
             },
             {
               "name": "Sergio Gurgel",
-              "telephones": [{"telephone":"999999-8605"}],
+              "telephones": [{"telephone":"+552199999-8605"}],
               "subSpecialty": [
-                "coluna"
+                "Coluna"
               ],
               "teamProfessionals": [],
               "id" : 11
             },
             {
               "name": "Flavio Cavallari",
-              "telephones": [{"telephone":"99985-4402"}],
+              "telephones": [{"telephone":"+552199985-4402"}],
               "subSpecialty": [
-                "coluna"
+                "Coluna"
               ],
               "teamProfessionals": [],
               "id" : 12
             },
             {
               "name": "Tito Rocha",
-              "telephones": [{"telephone":"97281-6408"}],
+              "telephones": [{"telephone":"+552197281-6408"}],
               "subSpecialty": [
-                "politrauma",
-                "diáfises"
+                "Politrauma",
+                "Diáfises"
               ],
               "teamProfessionals": [],
               "id" : 13
             },
             {
               "name": "Vincenzo Giordano",
-              "telephones": [{"telephone":"99751-6859"}],
+              "telephones": [{"telephone":"+552199751-6859"}],
               "subSpecialty": [
-                "politrauma",
-                "diáfises"
+                "Politrauma",
+                "Diáfises"
               ],
               "teamProfessionals": [],
               "id" : 14
             },
             {
               "name": "Marcus Calixto",
-              "telephones": [{"telephone":"98635-5936"}],
+              "telephones": [{"telephone":"+552198635-5936"}],
               "subSpecialty": [
-                "coluna"
+                "Coluna"
               ],
               "teamProfessionals": [
                 "Sergio Gurgel"
@@ -203,9 +203,9 @@
             },
             {
               "name": "Fernando Ribeiro",
-              "telephones": [{"telephone":"98799-0070"}],
+              "telephones": [{"telephone":"+552198799-0070"}],
               "subSpecialty": [
-                "coluna"
+                "Coluna"
               ],
               "teamProfessionals": [
                 "Sergio Gurgel"
@@ -227,14 +227,14 @@
         },
         {
           "name": "Rodrigo Frota",
-          "telephones": [{"telephone":"99928-0133"}],
+          "telephones": [{"telephone":"+552199928-0133"}],
           "subSpecialty": [],
           "teamProfessionals": [],
           "id" : 2
         },
         {
           "name": "Alexandre Dias",
-          "telephones": [{"telephone":"99571-1530"}],
+          "telephones": [{"telephone":"+552199571-1530"}],
           "subSpecialty": [],
           "teamProfessionals": [],
           "id" : 3
@@ -248,7 +248,7 @@
         },
         {
           "name": "Bruno Marroig",
-          "telephones": [{"telephone":"98795-0000"}],
+          "telephones": [{"telephone":"+552198795-0000"}],
           "subSpecialty": [],
           "teamProfessionals": [],
           "id" : 5

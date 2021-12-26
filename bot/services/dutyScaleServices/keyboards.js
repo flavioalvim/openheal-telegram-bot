@@ -1,14 +1,15 @@
 const {KeyboardFromArray, Keyboard} = require ('../../components/keyboard')
 const db = require('./database')
+const getSubSpecialtiesArray = require ("./utils.js")
 
 const getCorrectKeyboard = (option) =>{
 
     const getSpecialties = db().map(item => item.specialty) //Array of Objects
-    const buttons = [...getSpecialties, "sair"] // Array of Objects
+    const buttons = [...getSpecialties, "sair","texto"] // Array of Objects
     const regularKeyboard =  new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard =  new KeyboardFromArray(["Voltar"])
     const scaleEchoKeyboard = new Keyboard(getEchoKeyboardObject(), 1)
-    const scaleOrthopedicsKeyboard =  new KeyboardFromArray(getSubSpecialtiesArray("Ortopedia"), 1)
+    const scaleOrthopedicsKeyboard =  new KeyboardFromArray([...getSubSpecialtiesArray("Ortopedia"),"Voltar"], 1)
     const createScaleKeybord = (action, columns) => new Keyboard([{text: "Ver escala", action:action},{text: "Voltar", action: "Voltar"}], columns) 
 
     const keyboardOptions  = {
@@ -31,25 +32,6 @@ const getCorrectKeyboard = (option) =>{
         text : "Voltar",
         action: "Voltar"
     }])}
-
-    function getSubSpecialtiesArray (specialty) {
-
-        try
-        {
-        const filter = db()
-            .filter(item => item.specialty == specialty)
-            .map(item => item.professionals)
-            .reduce ((acc,item)=>[...acc, ...item],[])
-            .map(item =>item.subSpecialty)
-            .reduce((acc,item) => [...acc , ...item],[])
-    
-        return ([...new Set(filter),"Voltar"])
-        
-        }
-        catch
-        {
-            console.log("Parece que essa especialidade nao tem subespecialidades")
-        }}
 
 
     return (keyboardOptions[option])
