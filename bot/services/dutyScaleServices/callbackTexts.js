@@ -36,13 +36,13 @@ const getCommonCallback = (specialty) => {return ((ctx)=>
 
             //console.log(innerText)    
 
-            ctx.replyWithMarkdown(`*Telefones - ${specialty}*\n ${innerText}`, getCorrectKeyboard("subSpecialty",specialty))
+            ctx.replyWithMarkdown(`*Telefones - ${specialty}*\n ${innerText}`, getCorrectKeyboard("seeSubScale",specialty))
         }else{
             //console.log(professionals)
 
             const telephonesText = professionals.reduce((acc,{name, telephones}) => `${acc}${name} - ${getTelephones(telephones)}\n`, `*Lista de telefones - ${specialty}*\n\n`)
         
-            ctx.replyWithMarkdown(telephonesText,getCorrectKeyboard("seeScale"))
+            ctx.replyWithMarkdown(telephonesText,getCorrectKeyboard("seeScale",specialty))
 
 }})}
 
@@ -52,13 +52,12 @@ const getSpecialtiesText = () => {
 } //String
 
 
-
+//Acertar se o arquivo nao existir
 function getScaleCallback (filename) 
 {
     return ((ctx) => {
     const mdFile = fs.readFileSync(__dirname + '/mdFiles/'+ `${filename}.md`).toString()
-    console.log (mdFile)
-    ctx.replyWithMarkdown(mdFile,getCorrectKeyboard("return"))
+    ctx.replyWithMarkdown(text,getCorrectKeyboard("return"))
 })
 }
 

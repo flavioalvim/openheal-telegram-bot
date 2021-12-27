@@ -5,7 +5,7 @@ const getCorrectKeyboard = require('./keyboards_old')
 const {getCommonCallback,getMainScene, getScaleCallback, getSubSpecialtyTelephonesTextCallback} = require ('./callbackTexts')
 const getSubSpecialtiesArray = require('./utils.js')
 
-const getRegularObject1 = () => 
+const getStandardObject = () => 
 {
     const object = db().map(({specialty}) =>
     {   
@@ -23,18 +23,25 @@ const getRegularObject1 = () =>
     return object
 }
 
-const getRegularObject2 = () => [{
-    command: "subSpecialty",
-    commandCallback :"commonCallback",
-    action :"subSpecialty",
-    actionCallback: "commonCallback"
-}]
+const getScaleObject = () => {
+    const arraySpecialties = db().map(({specialty})=>specialty)
+    const arraySubSpecialties = arraySpecialties.map(item =>getSubSpecialtiesArray(item))
+    const unionArray = [...arraySpecialties, ...arraySubSpecialties]
+    const unionObject = unionArray.map(item => (
+        {
+            command:item,
+            commandCallback: getScaleCallback(item),
+            action: `scale-${item}`,
+            actionCallback: getScaleCallback(item)
+        }))
+    return unionObject
+}
 
 //console.log(getRegularObject2())
 
 
 
-const getRegularObject = () => [...getRegularObject1(), ...getRegularObject2()]
+const getRegularObject = () => [...getStandardObject(), ...getScaleObject()]
 //console.log(getRegularObject())
 
 const getExtraObject = ()=>

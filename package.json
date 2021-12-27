@@ -4,7 +4,7 @@
   "description": "",
   "main": "./bot/bot.js",
   "scripts": {
-    "dev": "nodemon --inspect /bot/bot.js"
+    "dev": "nodemon --inspect ./bot/bot.js"
   },
   "repository": {
     "type": "git",
