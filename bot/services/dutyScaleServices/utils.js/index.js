@@ -23,6 +23,8 @@ const getSubSpecialtiesArray = (specialty) => {
 
     const getSpecialtiesArray = () => db().map(({specialty}) => specialty).sort()
 
+
+
     module.exports = {
         getSubSpecialtiesArray,
         getSpecialtiesArray}

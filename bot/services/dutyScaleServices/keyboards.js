@@ -8,10 +8,10 @@ const getCorrectKeyboard = (option, specialty = "") =>{
     const regularKeyboard =  new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard =  new KeyboardFromArray(["Voltar"])
 
-    const seeSpecialtyScaleKeyboard = new Keyboard([{text : `Ver escala - ${specialty}` , action : `scale-${specialty}`},{text:"Voltar" , action: "Voltar"}],1)
+    const seeSpecialtyScaleKeyboard = new Keyboard([{text : `Ver escala - ${specialty}` , action : `escala_${specialty}`},{text:"Voltar" , action: "Voltar"}],1)
     
     const array = getSubSpecialtiesArray(specialty)
-    const subSpecialtiesButtons = array.map(item => ({text:`Ver escala - ${item}`, action: `scale-${item}`}))
+    const subSpecialtiesButtons = array.map(item => ({text:`Ver escala - ${item}`, action: `escala_${item}`}))
     const seeSubScaleKeyboard = new Keyboard([...subSpecialtiesButtons,{text:"Voltar" , action: "Voltar"}],1)
 
     const keyboardOptions  =  {

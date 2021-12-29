@@ -1,12 +1,14 @@
 const Markup = require('telegraf/markup')
 const Extra = require('telegraf/extra')
+const {modifyString} = require('./utils')
 
 class Button {
+
     constructor(text, action){
         this.text = text
-        this.action = action
+        this.action = modifyString(action)
 
-        return(Markup.callbackButton(text, action))
+        return(Markup.callbackButton(this.text, this.action))
     }
 }
 
@@ -25,12 +27,17 @@ class Keyboard {
 }
 
 class KeyboardFromArray{
+
+
     constructor (array, columns =1){
+
         this.buttons_obj = array.map(item => ({text:item, action:item}))
         this.columns = columns
         
         return new Keyboard (this.buttons_obj, this.columns)
     }
+
+    
 }
 
 module.exports = {

@@ -1,58 +1,55 @@
 const db = require('./database')
 const Stage = require ('telegraf/stage')
 const {leave} = Stage
-const getCorrectKeyboard = require('./keyboards')
-const {getCommonCallback,getMainScene, getScaleCallback, getSubSpecialtyTelephonesTextCallback} = require ('./callbackTexts')
+const {getCommonCallback,getMainScene, getScaleCallback} = require ('./callbackTexts')
 const {getSubSpecialtiesArray} = require('./utils.js')
+const {modifyString} = require('../../components/utils')
 
-const getStandardObject = () => 
+
+const getCommandsAndActionsObject = () =>
 {
-    const object = db().map(({specialty}) =>
-    {   
-        const commonCallback = getCommonCallback(specialty)
-
+    const getStandardObject = () => 
+    {
+        const object = db().map(({specialty}) =>
+        {
+            const string = modifyString(specialty)
             return (
                 {
-                    command: specialty,
-                    commandCallback :commonCallback,
-                    action :specialty,
-                    actionCallback: commonCallback
+                    command: string,
+                    commandCallback :getCommonCallback(specialty),
+                    action :string,
+                    actionCallback: getCommonCallback(specialty)
                 }
-            )
-    })
-    return object
-}
+                )
+        })
+        return object
+    }
 
-const getScaleObject = () => {
-    const objectSpecialties = db().map(({specialty,scaleMdFile})=>({specialty,scaleMdFile}))
-    const objectSubSpecialties = objectSpecialties
+    const getScaleObject = () => 
+    {
+        const objectSpecialties = db().map(({specialty,scaleMdFile})=>({specialty,scaleMdFile}))
+        const objectSubSpecialties = objectSpecialties
         .map(({specialty}) => getSubSpecialtiesArray(specialty))
         .filter((item)=>item.length>0)
         .reduce((acc,item) => ([...acc, ...item]),[])
         .map(item => ({specialty: item, scaleMdFile: item.toLowerCase()}))
 
-    const unionArray = [...objectSpecialties, ...objectSubSpecialties]
-    const unionObject = unionArray.map(({specialty,scaleMdFile}) => (
+        const unionArray = [...objectSpecialties, ...objectSubSpecialties]
+        const unionObject = unionArray.map(({specialty,scaleMdFile}) => 
         {
-            command:specialty,
-            commandCallback: getScaleCallback(scaleMdFile),
-            action: `scale-${specialty}`,
-            actionCallback: getScaleCallback(scaleMdFile)
-        }))
-    return unionObject
+            const string = modifyString(specialty)
+            return(
+                {
+                    command:`escala_${string}`,
+                    commandCallback: getScaleCallback(scaleMdFile),
+                    action: `escala_${string}`,
+                    actionCallback: getScaleCallback(scaleMdFile)
+                })
+        })
+        return unionObject
 }
 
-
-
-
-//console.log(getRegularObject2())
-
-
-
-const getRegularObject = () => [...getStandardObject(), ...getScaleObject()]
-//console.log(getRegularObject())
-
-const getExtraObject = ()=>
+    const getExtraObject = ()=>
     [
         {
             command: "sair",
@@ -63,12 +60,17 @@ const getExtraObject = ()=>
         {
             command: "Voltar",
             commandCallback: getMainScene,
-            action : "Voltar",
+            action : "voltar",
             actionCallback: getMainScene
         }
     ]// Array of objects
 
+    const commandsAndActions = [...getStandardObject(), ...getScaleObject(), ...getExtraObject()]
+    return commandsAndActions
+}
+
+
 
 module.exports = {
-    getRegularObject,
-    getExtraObject}
+    getCommandsAndActionsObject
+}

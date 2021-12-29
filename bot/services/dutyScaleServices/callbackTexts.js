@@ -1,4 +1,4 @@
-const { keyboard } = require('telegraf/markup')
+//const { keyboard } = require('telegraf/markup')
 const db= require('./database')
 const getCorrectKeyboard =require ('./keyboards')
 const {getSubSpecialtiesArray} = require('./utils.js')
@@ -74,7 +74,7 @@ function getScaleCallback (filename)
         }
         catch
         {
-            ctx.reply("Não há escala para essa especialidade ainda.",getCorrectKeyboard("return"))
+            ctx.reply("Não há escala para essa especialidade.",getCorrectKeyboard("return"))
         }
     })
 }

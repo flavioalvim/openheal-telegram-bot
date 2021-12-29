@@ -1,12 +1,10 @@
 const Scene = require ('telegraf/scenes/base')
-const  {getExtraObject, getMainScene, getRegularObject} = require ('../../services/dutyScaleServices')
+const  {getMainScene, getCommon} = require ('../../services/dutyScaleServices')
+const { getCommandsAndActionsObject } = require('../../services/dutyScaleServices/object')
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene
-
-const regularObject = getRegularObject()
-const extraObject = getExtraObject()  
-const commandsAndActions = [...regularObject, ...extraObject]
-
+ 
+const commandsAndActions = getCommandsAndActionsObject()
 
 dutyScaleScene.enter(getMainScene)
 dutyScaleScene.leave(ctx=>ctx.reply("Saindo do mudulo escala. Digite algo para novas opções"))
