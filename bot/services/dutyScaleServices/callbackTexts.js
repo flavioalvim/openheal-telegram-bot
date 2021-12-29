@@ -1,7 +1,7 @@
 const { keyboard } = require('telegraf/markup')
 const db= require('./database')
 const getCorrectKeyboard =require ('./keyboards')
-const getSubSpecialtiesArray = require('./utils.js')
+const {getSubSpecialtiesArray} = require('./utils.js')
 const fs = require ('fs')
 
 
@@ -47,18 +47,36 @@ const getCommonCallback = (specialty) => {return ((ctx)=>
 }})}
 
 const getSpecialtiesText = () => {
-    const getSpecialties = () => db().map(item => item.specialty)
-    return (getSpecialties().reduce((acc,item)=>(`${acc} \n /${item}`),"Essas são as escalas de sobreaviso:"))
+    const getSpecialties = () => db().map(({specialty}) => 
+    {
+        const string = specialty
+                        .toString()
+                        .replace(" ","_")
+                        .toLowerCase()
+                        .normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, "")
+        return string
+        })
+    return (getSpecialties().sort().reduce((acc,item)=>(`${acc} \n /${item}`),"Essas são as escalas de sobreaviso:"))
 } //String
 
 
 //Acertar se o arquivo nao existir
 function getScaleCallback (filename) 
 {
-    return ((ctx) => {
-    const mdFile = fs.readFileSync(__dirname + '/mdFiles/'+ `${filename}.md`).toString()
-    ctx.replyWithMarkdown(mdFile,getCorrectKeyboard("return"))
-})
+    
+    return ((ctx) => 
+    {
+        try
+        {
+            const mdFile = fs.readFileSync(__dirname + '/mdFiles/'+ `${filename}.md`).toString()
+            ctx.replyWithMarkdown(mdFile,getCorrectKeyboard("return"))
+        }
+        catch
+        {
+            ctx.reply("Não há escala para essa especialidade ainda.",getCorrectKeyboard("return"))
+        }
+    })
 }
 
 

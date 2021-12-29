@@ -1,11 +1,10 @@
 const {KeyboardFromArray, Keyboard} = require ('../../components/keyboard')
 const db = require('./database')
-const getSubSpecialtiesArray = require ("./utils.js/index.js")
+const {getSubSpecialtiesArray,getSpecialtiesArray} = require ("./utils.js/index.js")
 
 const getCorrectKeyboard = (option, specialty = "") =>{
 
-    const getSpecialties = db().map(item => item.specialty) //Array of Objects
-    const buttons = [...getSpecialties, "sair","texto"] // Array of Objects
+    const buttons = [...getSpecialtiesArray(), "sair"] // Array of Objects
     const regularKeyboard =  new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard =  new KeyboardFromArray(["Voltar"])
 

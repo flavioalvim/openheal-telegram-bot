@@ -1,9 +1,9 @@
 const db = require('./database')
 const Stage = require ('telegraf/stage')
 const {leave} = Stage
-const getCorrectKeyboard = require('./keyboards_old')
+const getCorrectKeyboard = require('./keyboards')
 const {getCommonCallback,getMainScene, getScaleCallback, getSubSpecialtyTelephonesTextCallback} = require ('./callbackTexts')
-const getSubSpecialtiesArray = require('./utils.js')
+const {getSubSpecialtiesArray} = require('./utils.js')
 
 const getStandardObject = () => 
 {
@@ -24,18 +24,26 @@ const getStandardObject = () =>
 }
 
 const getScaleObject = () => {
-    const arraySpecialties = db().map(({specialty})=>specialty)
-    const arraySubSpecialties = arraySpecialties.map(item =>getSubSpecialtiesArray(item))
-    const unionArray = [...arraySpecialties, ...arraySubSpecialties]
-    const unionObject = unionArray.map(item => (
+    const objectSpecialties = db().map(({specialty,scaleMdFile})=>({specialty,scaleMdFile}))
+    const objectSubSpecialties = objectSpecialties
+        .map(({specialty}) => getSubSpecialtiesArray(specialty))
+        .filter((item)=>item.length>0)
+        .reduce((acc,item) => ([...acc, ...item]),[])
+        .map(item => ({specialty: item, scaleMdFile: item.toLowerCase()}))
+
+    const unionArray = [...objectSpecialties, ...objectSubSpecialties]
+    const unionObject = unionArray.map(({specialty,scaleMdFile}) => (
         {
-            command:item,
-            commandCallback: getScaleCallback(item),
-            action: `scale-${item}`,
-            actionCallback: getScaleCallback(item)
+            command:specialty,
+            commandCallback: getScaleCallback(scaleMdFile),
+            action: `scale-${specialty}`,
+            actionCallback: getScaleCallback(scaleMdFile)
         }))
     return unionObject
 }
+
+
+
 
 //console.log(getRegularObject2())
 
@@ -57,12 +65,6 @@ const getExtraObject = ()=>
             commandCallback: getMainScene,
             action : "Voltar",
             actionCallback: getMainScene
-        },
-        {
-            command: "texto",
-            commandCallback: getScaleCallback("Ecocardiograma".toLocaleLowerCase()),
-            action: "texto",
-            actionCallback: getScaleCallback("Ecocardiograma".toLocaleLowerCase())
         }
     ]// Array of objects
 

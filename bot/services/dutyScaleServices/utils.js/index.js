@@ -20,4 +20,9 @@ const getSubSpecialtiesArray = (specialty) => {
         return []
     }}
 
-    module.exports = getSubSpecialtiesArray
+
+    const getSpecialtiesArray = () => db().map(({specialty}) => specialty).sort()
+
+    module.exports = {
+        getSubSpecialtiesArray,
+        getSpecialtiesArray}
