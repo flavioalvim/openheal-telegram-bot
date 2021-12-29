@@ -1,3 +1,4 @@
 .env
 /bot/services/dutyScaleServices/scales.json
-/bot/services/dutyScaleServices/mdFiles/clinicaMedica.md
+/bot/services/dutyScaleServices/mdFiles/
+
