@@ -1,5 +1,4 @@
 const {KeyboardFromArray, Keyboard} = require ('../../components/keyboard')
-const db = require('./database')
 const {getSubSpecialtiesArray,getSpecialtiesArray} = require ("./utils.js/index.js")
 
 const getCorrectKeyboard = (option, specialty = "") =>{

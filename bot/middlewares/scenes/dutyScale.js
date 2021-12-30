@@ -1,5 +1,5 @@
 const Scene = require ('telegraf/scenes/base')
-const  {getMainScene, getCommon} = require ('../../services/dutyScaleServices')
+const  {getMainScene} = require ('../../services/dutyScaleServices')
 const { getCommandsAndActionsObject } = require('../../services/dutyScaleServices/object')
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene

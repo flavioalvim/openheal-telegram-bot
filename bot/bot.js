@@ -1,11 +1,11 @@
 const env = require ('../.env')
 const Telegraf = require('telegraf')
 const bot = new Telegraf (env.token)
-const {Keyboard, KeyboardFromArray} = require('./components/keyboard')
+const {KeyboardFromArray} = require('./components/keyboard')
 const {graceMiddleware,crusadeMiddleware,heartMiddleware,dutyScaleScene} = require ('./middlewares')
 const Stage = require ('telegraf/stage')
 const session = require ('telegraf/session')
-const {enter, leave} = Stage
+const {enter} = Stage
 
 const k = new KeyboardFromArray(["escala"],3)
 const k1 = new KeyboardFromArray(["escala","voltar"],3)
