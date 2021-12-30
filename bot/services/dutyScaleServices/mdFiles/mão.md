@@ -9,4 +9,4 @@ Quarta -
 Quinta - 
 Sexta - 
 Sabado -
-Domingo -
+Domingo -s
