@@ -6,6 +6,7 @@ const {graceMiddleware,crusadeMiddleware,heartMiddleware,dutyScaleScene} = requi
 const Stage = require ('telegraf/stage')
 const session = require ('telegraf/session')
 const {enter} = Stage
+const {verifyUserMiddleware} = require('./middlewares/verifyUserMiddleware')
 
 const k = new KeyboardFromArray(["escala"],3)
 const k1 = new KeyboardFromArray(["escala","voltar"],3)
@@ -13,6 +14,8 @@ const k1 = new KeyboardFromArray(["escala","voltar"],3)
 const stage = new Stage([dutyScaleScene])
 bot.use(session())
 bot.use(stage.middleware())
+bot.use(verifyUserMiddleware)
+
 
 const commands = [
 {
@@ -48,6 +51,7 @@ bot.on('text', async(ctx, next)=>{
     const finalText = commands
         .map(item => item.command)
         .reduce((acc,item)=> (`${acc}\n /${item}`),"Escolha uma opção abaixo :")
+    //console.log(ctx)
     ctx.reply(finalText,k)
 })
 
