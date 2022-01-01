@@ -6,15 +6,14 @@ const {graceMiddleware,crusadeMiddleware,heartMiddleware,dutyScaleScene} = requi
 const Stage = require ('telegraf/stage')
 const session = require ('telegraf/session')
 const {enter} = Stage
-const {verifyUserMiddleware} = require('./middlewares/verifyUserMiddleware')
-
+const {verifyAndSaveUserMiddleware} = require('./middlewares/verifyAndSaveUserMiddleware')
 const k = new KeyboardFromArray(["escala"],3)
 const k1 = new KeyboardFromArray(["escala","voltar"],3)
 
 const stage = new Stage([dutyScaleScene])
 bot.use(session())
 bot.use(stage.middleware())
-bot.use(verifyUserMiddleware)
+//bot.use(verifyAndSaveUserMiddleware)
 
 
 const commands = [

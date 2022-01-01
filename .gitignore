@@ -1,5 +1,7 @@
 .env
 /bot/services/dutyScaleServices/scales.json
+/bot/services/dutyScaleServices/ids.json
 /bot/services/dutyScaleServices/mdFiles/
+/bot/services/dutyScaleServices/jsonFiles/
 /node_modules/
 

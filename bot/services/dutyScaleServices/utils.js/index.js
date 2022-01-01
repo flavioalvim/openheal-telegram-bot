@@ -1,5 +1,5 @@
 
-const db = require('../database')
+const {db} = require('../database')
 const getSubSpecialtiesArray = (specialty) => {
 
     try

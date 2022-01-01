@@ -1,4 +1,4 @@
-const db = require('./database')
+const {db} = require('./database')
 const Stage = require ('telegraf/stage')
 const {leave} = Stage
 const {getCommonCallback,getMainScene, getScaleCallback} = require ('./callbackTexts')
@@ -32,7 +32,7 @@ const getCommandsAndActionsObject = () =>
         .map(({specialty}) => getSubSpecialtiesArray(specialty))
         .filter((item)=>item.length>0)
         .reduce((acc,item) => ([...acc, ...item]),[])
-        .map(item => ({specialty: item, scaleMdFile: item.toLowerCase()}))
+        // .map(item => ({specialty: item.description, scaleMdFile: item.scaleMdFile}))
 
         const unionArray = [...objectSpecialties, ...objectSubSpecialties]
         const unionObject = unionArray.map(({specialty,scaleMdFile}) => 

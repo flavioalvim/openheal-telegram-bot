@@ -1,5 +1,5 @@
 //const { keyboard } = require('telegraf/markup')
-const db= require('./database')
+const {db}= require('./database')
 const getCorrectKeyboard =require ('./keyboards')
 const {getSubSpecialtiesArray} = require('./utils.js')
 const fs = require ('fs')
