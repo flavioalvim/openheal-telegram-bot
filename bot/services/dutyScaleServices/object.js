@@ -32,9 +32,20 @@ const getCommandsAndActionsObject = () =>
         .map(({specialty}) => getSubSpecialtiesArray(specialty))
         .filter((item)=>item.length>0)
         .reduce((acc,item) => ([...acc, ...item]),[])
-        // .map(item => ({specialty: item.description, scaleMdFile: item.scaleMdFile}))
 
-        const unionArray = [...objectSpecialties, ...objectSubSpecialties]
+        let specialtyArray =[]
+
+        const unicObjectSubSpecialties = objectSubSpecialties.filter(({specialty,scaleMdFile}) => {
+            
+            if (!specialtyArray.includes(specialty)) {
+                specialtyArray.push(specialty)
+                return ({specialty : specialty, scaleMdFile : scaleMdFile})
+            
+            }
+
+        })
+
+        const unionArray = [...objectSpecialties, ...unicObjectSubSpecialties]
         const unionObject = unionArray.map(({specialty,scaleMdFile}) => 
         {
             const string = modifyString(specialty)
