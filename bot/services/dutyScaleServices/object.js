@@ -2,7 +2,8 @@ const {db} = require('./database')
 const Stage = require ('telegraf/stage')
 const {leave} = Stage
 const {getCommonCallback,getMainScene, getScaleCallback} = require ('./callbackTexts')
-const {getSubSpecialtiesArray} = require('./utils.js')
+
+const {getSubSpecialtiesArray, getUnicObjectSpecialties} = require('./utils.js')
 const {modifyString} = require('../../components/utils')
 
 
@@ -33,17 +34,8 @@ const getCommandsAndActionsObject = () =>
         .filter((item)=>item.length>0)
         .reduce((acc,item) => ([...acc, ...item]),[])
 
-        let specialtyArray =[]
 
-        const unicObjectSubSpecialties = objectSubSpecialties.filter(({specialty,scaleMdFile}) => {
-            
-            if (!specialtyArray.includes(specialty)) {
-                specialtyArray.push(specialty)
-                return ({specialty : specialty, scaleMdFile : scaleMdFile})
-            
-            }
-
-        })
+        const unicObjectSubSpecialties = getUnicObjectSpecialties(objectSubSpecialties)
 
         const unionArray = [...objectSpecialties, ...unicObjectSubSpecialties]
         const unionObject = unionArray.map(({specialty,scaleMdFile}) => 
