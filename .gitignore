@@ -3,5 +3,5 @@
 /bot/services/dutyScaleServices/ids.json
 /bot/services/dutyScaleServices/mdFiles/
 /bot/services/dutyScaleServices/jsonFiles/
-/node_modules/
+node_modules
 

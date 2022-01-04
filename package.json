@@ -4,6 +4,7 @@
   "description": "",
   "main": "./bot/bot.js",
   "scripts": {
+    "start": "node ./bot/bot.js",
     "dev": "nodemon --inspect ./bot/bot.js"
   },
   "repository": {
