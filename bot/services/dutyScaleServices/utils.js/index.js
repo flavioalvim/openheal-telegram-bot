@@ -3,7 +3,7 @@ const { filter } = require('telegraf/composer')
 const {db} = require('../database')
 
 
-const getSubSpecialtiesArray = (specialty) => {
+const getSubSpecialties = (specialty) => {
 
     try
     {
@@ -23,7 +23,6 @@ const getSubSpecialtiesArray = (specialty) => {
         console.log("Parece que essa especialidade nao tem subespecialidades")
         return []
     }}
-
 
     const getSpecialtiesArray = () => db().map(({specialty}) => specialty).sort()
 
