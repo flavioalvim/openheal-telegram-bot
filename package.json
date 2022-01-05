@@ -4,7 +4,7 @@
   "description": "",
   "main": "./bot/bot.js",
   "scripts": {
-    "start": "node ./bot/bot.js",
+    "start": "NODE_ENV=production node ./bot/bot.js",
     "dev": "nodemon --inspect ./bot/bot.js"
   },
   "repository": {
@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/flavioalvim/openheal-telegram-cardio-bot#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
+    "lodash": "^4.17.21",
+    "mustache": "^4.2.0",
     "nodemon": "^2.0.15",
     "telegraf": "^3.39.0"
   }
