@@ -2,6 +2,11 @@ const { uniqBy, flatMap } = require('lodash')
 const { db } = require('../database')
 const { renderTemplateMarkdown } = require('./template')
 
+const formatPhone = (phone, index) => ({
+    showName: index === 0,
+    ...phone,
+})
+
 const getPhonesBySpecialty = (specialty) => {
     // Busca os profissionais da especialidade
     const { professionals } =
@@ -23,8 +28,9 @@ const getPhonesBySpecialty = (specialty) => {
             {
                 specialty,
                 professionals: professionals.map((item) => ({
+                    hasMultiplePhones: item.telephones.length > 1,
                     name: item.name,
-                    telephones: item.telephones,
+                    telephones: item.telephones.map(formatPhone)
                 })),
             },
         ]
@@ -47,8 +53,9 @@ const getPhonesBySpecialty = (specialty) => {
                 specialty: subSpecialty.specialty,
                 professionals: list
                     .map((professional) => ({
+                        hasMultiplePhones: item.telephones.length > 1,
                         name: professional.name,
-                        telephones: professional.telephones,
+                        telephones: professional.telephones.map(formatPhone),
                     }))
                     .sort((a, b) => (a.name < b.name ? -1 : 1)),
             }

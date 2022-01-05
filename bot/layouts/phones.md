@@ -2,7 +2,16 @@
 *Lista de Telefones - {{specialty}}*
 
 {{#professionals}}
-{{name}} - {{#telephones}}{{telephone}}{{/telephones}}
+{{^hasMultiplePhones}}
+{{#telephones}}
+{{name}} - {{telephone}}
+{{/telephones}}
+{{/hasMultiplePhones}}{{#hasMultiplePhones}}
+{{name}}
+{{#telephones}}
+    {{telephone}}
+{{/telephones}}
+{{/hasMultiplePhones}}
 
 {{/professionals}}
 {{/specialties}}

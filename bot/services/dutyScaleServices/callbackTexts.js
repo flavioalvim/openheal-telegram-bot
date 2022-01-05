@@ -6,19 +6,17 @@ const fs = require('fs')
 const getMainScene = (ctx) =>
     ctx.reply(getSpecialtiesText(), getCorrectKeyboard('regular'))
 
-const getCommonCallback = (specialty) => {
-    return async (ctx) => {
-        const messages = getMarkdownTextFromPhonesBySpecialty(specialty)
+const getCommonCallback = (specialty) => async (ctx) => {
+    const messages = getMarkdownTextFromPhonesBySpecialty(specialty)
 
-        for (const { specialty: itemSpecialty, message } of messages) {
-            await ctx.reply(
-                message,
-                getCorrectKeyboard(
-                    itemSpecialty === specialty ? 'seeScale' : 'seeSubScale',
-                    itemSpecialty
-                )
+    for (const { specialty: itemSpecialty, message } of messages) {
+        await ctx.reply(
+            message,
+            getCorrectKeyboard(
+                itemSpecialty === specialty ? 'seeScale' : 'seeSubScale',
+                itemSpecialty
             )
-        }
+        )
     }
 }
 
