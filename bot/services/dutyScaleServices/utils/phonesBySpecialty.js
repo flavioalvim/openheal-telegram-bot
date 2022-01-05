@@ -1,4 +1,4 @@
-const { uniqBy, flatMap, chunk } = require('lodash')
+const { uniqBy, flatMap } = require('lodash')
 const { db } = require('../database')
 const { renderTemplateMarkdown } = require('./template')
 
@@ -36,25 +36,32 @@ const getPhonesBySpecialty = (specialty) => {
         .map((subSpecialty) => {
             // Busca os profissionais da subespecialidade
             const list = professionals.filter((professional) =>
-                professional?.subSpecialties?.some(
-                    (subSpecialty) => subSpecialty.specialty === subSpecialty.specialty
+                professional.subSpecialties?.some(
+                    (professionalSubSpecialty) =>
+                        professionalSubSpecialty.specialty ===
+                        subSpecialty.specialty
                 )
             )
 
             return {
                 specialty: subSpecialty.specialty,
-                professionals: list.map((professional) => ({
-                    name: professional.name,
-                    telephones: professional.telephones,
-                })),
+                professionals: list
+                    .map((professional) => ({
+                        name: professional.name,
+                        telephones: professional.telephones,
+                    }))
+                    .sort((a, b) => (a.name < b.name ? -1 : 1)),
             }
         })
 }
 
 const getMarkdownTextFromPhonesBySpecialty = (specialty) => {
-    const specialties = getPhonesBySpecialty(specialty)
-    return specialties.map(item => renderTemplateMarkdown('phones', {
-        specialties: [item]
+    const items = getPhonesBySpecialty(specialty)
+    return items.map((item) => ({
+        specialty: item.specialty,
+        message: renderTemplateMarkdown('phones', {
+            specialties: [item],
+        }),
     }))
 }
 

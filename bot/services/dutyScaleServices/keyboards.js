@@ -1,7 +1,8 @@
+const { getSpecialties, getSubspecialties } = require('./database')
 const { KeyboardFromArray, Keyboard } = require('../../components/keyboard')
-const { getSubSpecialtiesArray, getSpecialtiesArray } = require('./utils')
+const { getSpecialtiesArray } = require('./utils')
 
-const getCorrectKeyboard = (option, specialty = '') => {
+const getCorrectKeyboard = (option, specialty) => {
     const buttons = [...getSpecialtiesArray(), 'sair'] // Array of Objects
     const regularKeyboard = new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard = new KeyboardFromArray(['Voltar'])
@@ -9,15 +10,27 @@ const getCorrectKeyboard = (option, specialty = '') => {
     const seeSpecialtyScaleKeyboard = new Keyboard(
         [
             {
-                text: `Ver escala - ${specialty}`,
-                action: `escala_${specialty}`,
+                text: `Ver escala - ${specialty ?? ''}`,
+                action: `escala_${specialty ?? ''}`,
             },
             { text: 'Voltar', action: 'Voltar' },
         ],
         1
     )
 
-    const array = getSubSpecialtiesArray(specialty)
+    // Busca pelo nome da especialidade ou da subespecialidade
+    let array = getSpecialties().filter(
+        (item) => !specialty || item === specialty
+    )
+    if (!array.length) {
+        array = getSubspecialties().filter(
+            (item) => item.specialty === specialty
+        )
+    }
+    if (!array.length) {
+        return
+    }
+
     const subSpecialtiesButtons = array.map((item) => ({
         text: `Ver escala - ${item?.specialty ?? item}`,
         action: `escala_${item?.specialty ?? item}`,
