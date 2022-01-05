@@ -1,10 +1,18 @@
 const env = require('../../.env')
 const fs = require('fs')
 
+const {
+    TELEGRAM_USER_ID
+} = process.env
+
+const userIds = (TELEGRAM_USER_ID ?? '0').split(',')
+    .map(Number)
+    .filter(id => id > 0)
+
 const verifyUserMiddleware = (ctx, next) => {
 
-    const sameIdMsg = ctx.update.message && env.userID.includes (ctx.update.message.from.id)
-    const sameIdCallback = ctx.update.callback_query && env.userID.includes (ctx.update.callback_query.from.id)
+    const sameIdMsg = ctx.update.message && userIds.includes(ctx.update.message.from.id)
+    const sameIdCallback = ctx.update.callback_query && userIds.includes(ctx.update.callback_query.from.id)
 
     if(sameIdMsg || sameIdCallback){
         next()
