@@ -1,7 +1,7 @@
 
 const {db}= require('./database')
 const getCorrectKeyboard =require ('./keyboards')
-const {getSubSpecialtiesArray, getUnicObjectSpecialties} = require('./utils.js/index.js')
+const {getSubSpecialtiesArray, getUnicObjectSpecialties} = require('./utils')
 const fs = require ('fs')
 
 

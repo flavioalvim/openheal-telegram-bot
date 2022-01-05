@@ -1,79 +1,83 @@
-const {db} = require('./database')
-const Stage = require ('telegraf/stage')
-const {leave} = Stage
-const {getCommonCallback,getMainScene, getScaleCallback} = require ('./callbackTexts')
+const { db } = require('./database')
+const Stage = require('telegraf/stage')
+const { leave } = Stage
+const {
+    getCommonCallback,
+    getMainScene,
+    getScaleCallback,
+} = require('./callbackTexts')
 
-const {getSubSpecialtiesArray, getUnicObjectSpecialties} = require('./utils.js')
-const {modifyString} = require('../../components/utils')
+const {
+    getSubSpecialtiesArray,
+    getUnicObjectSpecialties,
+} = require('./utils/index.js')
+const { modifyString } = require('../../components/utils')
 
-
-const getCommandsAndActionsObject = () =>
-{
-    const getStandardObject = () => 
-    {
-        const object = db().map(({specialty}) =>
-        {
+const getCommandsAndActionsObject = () => {
+    const getStandardObject = () => {
+        const object = db().map(({ specialty }) => {
             const string = modifyString(specialty)
-            return (
-                {
-                    command: string,
-                    commandCallback :getCommonCallback(specialty),
-                    action :string,
-                    actionCallback: getCommonCallback(specialty)
-                }
-                )
+            return {
+                command: string,
+                commandCallback: getCommonCallback(specialty),
+                action: string,
+                actionCallback: getCommonCallback(specialty),
+            }
         })
         return object
     }
 
-    const getScaleObject = () => 
-    {
-        const objectSpecialties = db().map(({specialty,scaleMdFile})=>({specialty,scaleMdFile}))
-        const objectSubSpecialties = objectSpecialties
-        .map(({specialty}) => getSubSpecialtiesArray(specialty))
-        .filter((item)=>item.length>0)
-        .reduce((acc,item) => ([...acc, ...item]),[])
+    const getScaleObject = () => {
+        const objectSpecialties = db().map(({ specialty, scaleMdFile }) => ({
+            specialty,
+            scaleMdFile,
+        }))
 
+        // const objectSubSpecialties = objectSpecialties
+        //     .map(({ specialty }) => getSubSpecialtiesArray(specialty))
+        //     .filter((item) => item.length > 0)
+        //     .reduce((acc, item) => [...acc, ...item], [])
 
-        const unicObjectSubSpecialties = getUnicObjectSpecialties(objectSubSpecialties)
+        // const unicObjectSubSpecialties =
+        //     getUnicObjectSpecialties(objectSubSpecialties)
+        const unicObjectSubSpecialties = []
 
         const unionArray = [...objectSpecialties, ...unicObjectSubSpecialties]
-        const unionObject = unionArray.map(({specialty,scaleMdFile}) => 
-        {
+        const unionObject = unionArray.map(({ specialty, scaleMdFile }) => {
             const string = modifyString(specialty)
-            return(
-                {
-                    command:`escala_${string}`,
-                    commandCallback: getScaleCallback(scaleMdFile),
-                    action: `escala_${string}`,
-                    actionCallback: getScaleCallback(scaleMdFile)
-                })
+            return {
+                command: `escala_${string}`,
+                commandCallback: getScaleCallback(scaleMdFile),
+                action: `escala_${string}`,
+                actionCallback: getScaleCallback(scaleMdFile),
+            }
         })
         return unionObject
-}
+    }
 
-    const getExtraObject = ()=>
-    [
+    const getExtraObject = () => [
         {
-            command: "sair",
-            commandCallback : leave(),
-            action : "sair",
-            actionCallback : leave()
+            command: 'sair',
+            commandCallback: leave(),
+            action: 'sair',
+            actionCallback: leave(),
         },
         {
-            command: "Voltar",
+            command: 'Voltar',
             commandCallback: getMainScene,
-            action : "voltar",
-            actionCallback: getMainScene
-        }
-    ]// Array of objects
+            action: 'voltar',
+            actionCallback: getMainScene,
+        },
+    ] // Array of objects
 
-    const commandsAndActions = [...getStandardObject(), ...getScaleObject(), ...getExtraObject()]
+    const commandsAndActions = [
+        ...getStandardObject(),
+        ...getScaleObject(),
+        ...getExtraObject(),
+    ]
     return commandsAndActions
 }
 
-
-
 module.exports = {
-    getCommandsAndActionsObject
+    getCommandsAndActionsObject,
 }

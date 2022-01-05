@@ -1,7 +1,5 @@
-const fs = require('fs')
-const db = () => JSON.parse(fs.readFileSync(__dirname + '/scales.json'))
+const db = require('./scales.json')
 
-module.exports = 
-{
-    db
+module.exports = {
+    db: () => db,
 }

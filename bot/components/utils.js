@@ -1,15 +1,12 @@
-
 class Utils {
-
-    static modifyString (string)
-    {
+    static modifyString(string) {
         const newString = string
-        .toString()
-        .replace(" ","_")
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, "")
-    return newString
+            .toString()
+            .replace(' ', '_')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+        return newString
     }
 }
 
