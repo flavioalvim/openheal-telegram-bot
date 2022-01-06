@@ -62,15 +62,4 @@ const modifyString = (string) => {
 
 
 
-const hasProfessionals = (specialty) => {
-    if (getSpecialty(specialty) && getSpecialty(specialty).professionals && getSpecialty(specialty).professionals.length > 0) { return true }
-    return false
-}
-
-const hasSubSpecialties = (professional) => {
-    if (professional.subSpecialties && professional.subSpecialties.length > 0) { return true }
-    return false
-}
-
-
 module.exports = scale
