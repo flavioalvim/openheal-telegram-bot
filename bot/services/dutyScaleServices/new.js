@@ -1,56 +1,88 @@
 const _ = require("lodash")
 const { db } = require('./database')
 
+const scale = (data) => {
 
-const scale = (db) => {
+    let newData = data
 
-    const getDataFromSpecialty = (specialty) => (
-        {
-            "data": db.find(item => item.specialty === specialty)
-        })
+    const getDataFrom = (specialty) => {
+        newData = data.find(item => item.specialty === specialty)
+        return (
+            {
+                "data": newData,
+                getProfessionals
+            })
+    }
 
-    const getProfessionalsFrom = (specialty) => {
-        function getProfessional(name) {
+    const getProfessionals = () => {
+        newData = newData.professionals
+        return (
+            {
+                "data": newData,
+                filterByName,
+                filterBySubSpecialty
+            })
+    }
 
-            function getTelephones() {
-                return ({
-                    "data": getDataFromSpecialty(specialty).data.professionals.find(item => item.name === name).telephones
-                })
-            }
-
-            return ({
-                "data": getDataFromSpecialty(specialty).data.professionals.find(item => item.name === name),
+    const filterByName = (name) => {
+        newData = newData.find(item => item.name === name)
+        return (
+            {
+                "data": newData,
                 getTelephones
             })
-        }
+    }
 
-        return ({
-            "data": getDataFromSpecialty(specialty).data.professionals,
-            getProfessional
+    const filterBySubSpecialty = (subSpecialty) => {
+        array = newData.map(professional => ({ "name": professional.name, "telephones": professional.telephones, "subSpecialties": professional.subSpecialties.map(item => item.specialty) }))
+        array2 = array.filter(item => item.subSpecialties.includes(subSpecialty))
+        newData = array2
+        return({
+            "data": newData
         })
     }
 
-    const getSubSpeciatiesArrayFrom = (specialty) =>{
-        const r = _.flatMap(getProfessionalsFrom(specialty).data.map(({subSpecialties}) => subSpecialties))
-        return (_.uniqBy(r,"specialty"))
+
+    const getTelephones = () => {
+        newData = newData.telephones
+        return (
+            {
+                "data": newData
+            })
     }
 
+    const getSubSpeciatiesArrayFrom = (specialty) => {
+        array = _.flatMap(getDataFrom(specialty).getProfessionals().data.map(item => item.subSpecialties))
+        return _.uniqBy(array, "specialty")
+    }
 
-
-    return ({
-        "data": db,
-        getDataFromSpecialty,
-        getProfessionalsFrom,
-        getSubSpeciatiesArrayFrom
-    })
+    return (
+        {
+            "data": data,
+            getDataFrom,
+            getSubSpeciatiesArrayFrom
+        }
+    )
 }
 
-const l = scale(db())
-//console.log(l.getProfessionalsFrom("Ecocardiograma").getProfessional("Cinara").getTelephones())
-//const arrayNomes =  l.getProfessionalsFrom("Ecocardiograma").data.map(item =>item.name)
-//console.log(arrayNomes)
-console.log(l.getSubSpeciatiesArrayFrom("Ortopedia"))
+//---------
 
+const l = scale(db())
+//console.log (txt("Ortopedia"))
+
+const txt = (specialty) =>{
+    const arr = l.getSubSpeciatiesArrayFrom("Ortopedia").map(item => item.specialty)
+    const arr2 = arr.map(itemOfArray => {
+        const subSpecialty = itemOfArray
+        const professionals = l.getDataFrom(specialty).getProfessionals().filterBySubSpecialty(itemOfArray).data
+        console.log(subSpecialty)
+        console.log(professionals)
+})}
+
+
+console.log(txt("Ortopedia"))
+
+//console.log(l.getDataFrom("Ortopedia").getProfessionals().filterBySubSpecialty("Pé"))
 
 
 const modifyString = (string) => {
@@ -58,8 +90,6 @@ const modifyString = (string) => {
     console.log(newString)
     return newString
 }
-
-
 
 
 module.exports = scale
