@@ -37,7 +37,7 @@ const scale = (data) => {
         array = newData.map(professional => ({ "name": professional.name, "telephones": professional.telephones, "subSpecialties": professional.subSpecialties.map(item => item.specialty) }))
         array2 = array.filter(item => item.subSpecialties.includes(subSpecialty))
         newData = array2
-        return({
+        return ({
             "data": newData
         })
     }
@@ -70,14 +70,21 @@ const scale = (data) => {
 const l = scale(db())
 //console.log (txt("Ortopedia"))
 
-const txt = (specialty) =>{
-    const arr = l.getSubSpeciatiesArrayFrom("Ortopedia").map(item => item.specialty)
-    const arr2 = arr.map(itemOfArray => {
+const txtArray  = (specialty) => {
+    const outerArray = l.getSubSpeciatiesArrayFrom("Ortopedia").map(item => item.specialty)
+    const innerArray = outerArray.map(itemOfArray => {
         const subSpecialty = itemOfArray
-        const professionals = l.getDataFrom(specialty).getProfessionals().filterBySubSpecialty(itemOfArray).data
-        console.log(subSpecialty)
-        console.log(professionals)
-})}
+        const p = l.getDataFrom(specialty).getProfessionals().filterBySubSpecialty(itemOfArray).data
+        const professionals = p.map(item => ({ "name": item.name, "telephones": item.telephones }))
+        return (
+            {
+                "subSpecialty": subSpecialty,
+                "professionals": professionals
+            })}
+
+    )
+    return innerArray
+}
 
 
 console.log(txt("Ortopedia"))
