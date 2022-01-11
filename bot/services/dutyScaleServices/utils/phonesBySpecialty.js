@@ -48,7 +48,7 @@ const getPhonesBySpecialty = (specialty) => {
                 specialty: subSpecialty.specialty,
                 professionals: list
                     .map((professional) => ({
-                        hasMultiplePhones: item.telephones.length > 1,
+                        hasMultiplePhones: professional.telephones.length > 1,
                         name: professional.name,
                         telephones: professional.telephones,
                     }))
