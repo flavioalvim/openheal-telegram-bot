@@ -1,0 +1,25 @@
+name: CI Api Production
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git Pull and Build
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          script: |
+            cd ~/code/bot
+            pm2 stop telegram_bot
+            git pull origin main
+            yarn
+            pm2 start telegram_bot
