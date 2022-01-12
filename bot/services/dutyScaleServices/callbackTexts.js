@@ -1,23 +1,26 @@
 const { db } = require('./database')
 const getCorrectKeyboard = require('./keyboards')
-const { getMarkdownTextFromPhonesBySpecialty } = require('./utils')
+const { getMarkdownTextFromPhonesBySpecialty, getAllPhones } = require('./utils')
 const fs = require('fs')
 
 const getMainScene = (ctx) =>
     ctx.reply(getSpecialtiesText(), getCorrectKeyboard('regular'))
 
 const getCommonCallback = (specialty) => async (ctx) => {
-    const messages = getMarkdownTextFromPhonesBySpecialty(specialty)
+    const { message, buttons } = getAllPhones(specialty)
 
-    for (const { specialty: itemSpecialty, message } of messages) {
-        await ctx.reply(
-            message,
-            getCorrectKeyboard(
-                itemSpecialty === specialty ? 'seeScale' : 'seeSubScale',
-                itemSpecialty
-            )
-        )
-    }
+    const customButton = getCorrectKeyboard('customKeyboard', specialty)
+
+    await ctx.replyWithMarkdown(
+        message,
+        buttons.length === 1 ? getCorrectKeyboard(
+            buttons[0] === specialty ? 'seeScale' : 'seeSubScale',
+            buttons[0]
+        ) : customButton([
+            ...buttons, 
+            'voltar'
+        ])
+    )
 }
 
 const getSpecialtiesText = () => {

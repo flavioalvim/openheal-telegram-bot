@@ -46,6 +46,7 @@ const getCorrectKeyboard = (option, specialty) => {
         seeScale: seeSpecialtyScaleKeyboard,
         return: returnKeyboard,
         seeSubScale: seeSubScaleKeyboard,
+        customKeyboard: (buttons) => new KeyboardFromArray(buttons)
     }
 
     return keyboardOptions[option]
