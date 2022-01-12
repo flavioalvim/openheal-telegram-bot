@@ -1,4 +1,4 @@
-const { TELEGRAM_USER_ID } = process.env
+const { TELEGRAM_USER_ID, BYPASS_VERIFICATION = 'false' } = process.env
 
 const userIds = (TELEGRAM_USER_ID ?? '0')
     .split(',')
@@ -6,6 +6,10 @@ const userIds = (TELEGRAM_USER_ID ?? '0')
     .filter((id) => id > 0)
 
 const verifyUserMiddleware = (ctx, next) => {
+    if (BYPASS_VERIFICATION === 'true') {
+        return next()
+    }
+
     const sameIdMsg =
         ctx.update.message && userIds.includes(ctx.update.message.from.id)
     const sameIdCallback =
@@ -15,10 +19,10 @@ const verifyUserMiddleware = (ctx, next) => {
     if (sameIdMsg || sameIdCallback) {
         next()
     } else {
-        console.log('verified')
+        console.log('not verified')
         ctx.toSave = ctx.update.message.from || ctx.update.callback_query.from
         ctx.reply(
-            'Desculpa mas esse usuario não está autorizado! Contacte o administrador...'
+            'Desculpa mas esse usuário não está autorizado! Contacte o administrador...'
         )
     }
 }

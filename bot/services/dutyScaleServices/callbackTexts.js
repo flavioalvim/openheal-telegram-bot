@@ -1,6 +1,9 @@
 const { db } = require('./database')
 const getCorrectKeyboard = require('./keyboards')
-const { getMarkdownTextFromPhonesBySpecialty, getAllPhones } = require('./utils')
+const {
+    getMarkdownTextFromPhonesBySpecialty,
+    getAllPhones,
+} = require('./utils')
 const fs = require('fs')
 
 const getMainScene = (ctx) =>
@@ -13,13 +16,12 @@ const getCommonCallback = (specialty) => async (ctx) => {
 
     await ctx.replyWithMarkdown(
         message,
-        buttons.length === 1 ? getCorrectKeyboard(
-            buttons[0] === specialty ? 'seeScale' : 'seeSubScale',
-            buttons[0]
-        ) : customButton([
-            ...buttons, 
-            'voltar'
-        ])
+        buttons.length === 1
+            ? getCorrectKeyboard(
+                  buttons[0] === specialty ? 'seeScale' : 'seeSubScale',
+                  buttons[0]
+              )
+            : customButton([...buttons, 'voltar'])
     )
 }
 
@@ -45,9 +47,10 @@ const getSpecialtiesText = () => {
 //Acertar se o arquivo nao existir
 const getScaleCallback = (filename) => (ctx) => {
     try {
-        const mdFile = fs
-            .readFileSync(__dirname + '/mdFiles/' + `${filename}.md`)
-            .toString()
+        const mdFile = fs.readFileSync(
+            `${__dirname}/mdFiles/${filename}.md`,
+            'utf-8'
+        )
         console.log(mdFile)
         ctx.replyWithMarkdown(mdFile, getCorrectKeyboard('return'))
     } catch {

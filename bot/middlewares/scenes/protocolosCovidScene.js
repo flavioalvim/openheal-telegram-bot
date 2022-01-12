@@ -1,18 +1,22 @@
-const Scene = require('telegraf/scenes/base')
-const getCommandsAndActionsObject  = require('../../services/protocolosCovidServices/object')
 const fs = require('fs')
-//const fs = require('../../services/protocolosCovidServices/mdFiles/protocoloCovid.md')
+const Scene = require('telegraf/scenes/base')
+const getCommandsAndActionsObject = require('../../services/protocolosCovidServices/object')
 
-const txt = fs.readFileSync('/Users/flavio/openheal/openheal-telegram-cardio-bot/bot/services/protocolosCovidServices/mdFiles/protocoloCovid.md').toString()
+const txt = fs.readFileSync(
+    `${__dirname}/../../services/protocolosCovidServices/mdFiles/protocoloCovid.md`,
+    'utf-8'
+)
 
 const protocolosCovidScene = new Scene('protocolosCovidScene') //Scene
 
 const commandsAndActions = getCommandsAndActionsObject()
-const getMainScene = (ctx)=>ctx.replyWithMarkdown(txt)
+const getMainScene = (ctx) => ctx.replyWithMarkdown(txt)
 
 protocolosCovidScene.enter(getMainScene)
 protocolosCovidScene.leave((ctx) =>
-    ctx.reply('Saindo do mudulo de protocolos covid. Digite algo para novas opções')
+    ctx.reply(
+        'Saindo do mudulo de protocolos covid. Digite algo para novas opções'
+    )
 )
 
 commandsAndActions.forEach(

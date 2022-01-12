@@ -8,22 +8,28 @@ const {
     crusadeMiddleware,
     heartMiddleware,
     dutyScaleScene,
-    protocolosCovidScene
-
+    protocolosCovidScene,
 } = require('./middlewares')
 const verifyUserMiddleware = require('./middlewares/verifyUserMiddleware')
-const {getUserContactMiddleware} = require('./middlewares/getUserContactMiddleware')
-
 const {
-    TELEGRAM_TOKEN
-} = process.env
+    getUserContactMiddleware,
+} = require('./middlewares/getUserContactMiddleware')
+
+const { NODE_ENV = 'development', TELEGRAM_TOKEN } = process.env
+
+console.log('BOT Online 🔥')
+
+// Desativa o console.log noFix ambiente de produção
+if (NODE_ENV === 'production') {
+    console.log = function() {}
+}
 
 const bot = new Telegraf(TELEGRAM_TOKEN)
 const { enter } = Stage
-const k = new KeyboardFromArray(['escala','protocolos_covid'], 1)
+const k = new KeyboardFromArray(['escala', 'protocolos_covid'], 1)
 //const k1 = new KeyboardFromArray(['escala', 'voltar'], 3)
 
-const stage = new Stage([dutyScaleScene,protocolosCovidScene])
+const stage = new Stage([dutyScaleScene, protocolosCovidScene])
 bot.use(session())
 bot.use(stage.middleware())
 bot.use(getUserContactMiddleware)
@@ -32,12 +38,12 @@ bot.use(verifyUserMiddleware)
 const commands = [
     {
         command: 'escalas',
-        callBack: enter('dutyScaleScene')
+        callBack: enter('dutyScaleScene'),
     },
     {
         command: 'protocolos_covid',
-        callBack: enter('protocolosCovidScene')
-    }
+        callBack: enter('protocolosCovidScene'),
+    },
 ]
 
 commands.forEach(({ command, callBack }) => {
@@ -47,12 +53,12 @@ commands.forEach(({ command, callBack }) => {
 const actions = [
     {
         action: 'escala',
-        callback: enter('dutyScaleScene')
+        callback: enter('dutyScaleScene'),
     },
     {
         action: 'protocolos_covid',
-        callback: enter('protocolosCovidScene')
-    }
+        callback: enter('protocolosCovidScene'),
+    },
 ]
 
 actions.forEach(({ action, callback }) => {
