@@ -1,6 +1,7 @@
 const { getSpecialties, getSubspecialties } = require('./database')
 const { KeyboardFromArray, Keyboard } = require('../../components/keyboard')
 const { getSpecialtiesArray } = require('./utils')
+const {modifyString} = require('../../components/utils')
 
 const getCorrectKeyboard = (option, specialty) => {
     const buttons = [...getSpecialtiesArray(), 'sair'] // Array of Objects
@@ -33,7 +34,7 @@ const getCorrectKeyboard = (option, specialty) => {
 
     const subSpecialtiesButtons = array.map((item) => ({
         text: `Ver escala - ${item?.specialty ?? item}`,
-        action: `escala_${item?.specialty ?? item}`,
+        action: `escala_${item?.specialty ?? modifyString(item)}`,
     }))
 
     const seeSubScaleKeyboard = new Keyboard(
@@ -46,6 +47,7 @@ const getCorrectKeyboard = (option, specialty) => {
         seeScale: seeSpecialtyScaleKeyboard,
         return: returnKeyboard,
         seeSubScale: seeSubScaleKeyboard,
+        customKeyboard: (buttons) => new KeyboardFromArray(buttons)
     }
 
     return keyboardOptions[option]

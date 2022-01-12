@@ -4,11 +4,16 @@ const { renderTemplateMarkdown } = require('./template')
 
 const getPhonesBySpecialty = (specialty) => {
     // Busca os profissionais da especialidade
-    const { professionals } =
+    let { professionals } =
         db().find((item) => item.specialty === specialty) ?? {}
 
     if (!professionals?.length) {
-        return
+        // Checa se está em uma subspecialidade
+        const items = flatMap(db(), (item) => item.professionals)
+        professionals = items.filter((item) => item.subSpecialties?.some((sub) => sub.specialty === specialty))
+        if (!professionals.length) {
+            return
+        }
     }
 
     // Busca as sub especialidades dos profissionais e coloca em uma lista
@@ -48,7 +53,7 @@ const getPhonesBySpecialty = (specialty) => {
                 specialty: subSpecialty.specialty,
                 professionals: list
                     .map((professional) => ({
-                        hasMultiplePhones: item.telephones.length > 1,
+                        hasMultiplePhones: professional.telephones.length > 1,
                         name: professional.name,
                         telephones: professional.telephones,
                     }))
@@ -67,7 +72,17 @@ const getMarkdownTextFromPhonesBySpecialty = (specialty) => {
     }))
 }
 
+const getAllPhones = (specialty) => {
+    const items = getPhonesBySpecialty(specialty)
+
+    return {
+        buttons: items.map((item) => item.specialty),
+        message: renderTemplateMarkdown('phones', { specialties: items }),
+    }
+}
+
 module.exports = {
     getPhonesBySpecialty,
     getMarkdownTextFromPhonesBySpecialty,
+    getAllPhones,
 }

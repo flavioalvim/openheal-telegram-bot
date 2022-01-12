@@ -1,5 +1,7 @@
+*Lista de telefones*
+
 {{#specialties}}
-*Lista de Telefones - {{specialty}}*
+*{{specialty}}*
 
 {{#professionals}}
 {{^hasMultiplePhones}}
