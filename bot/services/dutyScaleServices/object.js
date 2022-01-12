@@ -1,4 +1,4 @@
-const { db, getSubspecialties } = require('./database')
+const { db, getSubspecialties, getSpecialties } = require('./database')
 const stage = require('telegraf/stage')
 const {
     getCommonCallback,
@@ -29,20 +29,14 @@ const getCommandsAndActionsObject = () => {
     
 
     const getScaleObject = () => {
-        const objectSpecialties = db().map(({ specialty, scaleMdFile }) => ({
-            specialty,
-            scaleMdFile,
-        }))
-
-        const unicObjectSubSpecialties = []
-
-        const unionArray = [...objectSpecialties, ...unicObjectSubSpecialties]
-        const unionObject = unionArray.map(({ specialty, scaleMdFile }) => {
-            //const string = modifyString(specialty)
+        const objectSpecialties = [...db().map(item=>({"specialty":item.specialty , "scaleMdFile":item.scaleMdFile })), ...getSubspecialties()]
+        
+        const unionObject = objectSpecialties.map(({ specialty, scaleMdFile }) => {
+            const string = modifyString(specialty)
             return {
-                command: `escala_${specialty}`,
+                command: `escala_${string}`,
                 commandCallback: getScaleCallback(scaleMdFile),
-                action: `escala_${specialty}`,
+                action: `escala_${string}`,
                 actionCallback: getScaleCallback(scaleMdFile),
             }
         })
