@@ -20,32 +20,9 @@ const verifyUserMiddleware = (ctx, next) => {
         ctx.reply(
             'Desculpa mas esse usuario não está autorizado! Contacte o administrador...'
         )
-        next()
     }
 }
 
-const saveIDsMiddleware = (ctx, next) => {
-    //console.log(ctx)
-    if (ctx.toSave) {
-        //grave e esvazie toSave
-        //fs.writeFile('./toSave.json',ctx.toSave.toString(),{encoding:"utf8",flag:"w"},(err)=>console.log(err))
-        ctx.toSave = {}
-    }
-}
 
-const exec = (ctx, ...middlewares) => {
-    const run = (index) => {
-        middlewares &&
-            index < middlewares.length &&
-            middlewares[index](ctx, () => run(index + 1))
-    }
-    run(0)
-}
 
-const verifyAndSaveUserMiddleware = (ctx, next) => {
-    exec(ctx, verifyUserMiddleware, saveIDsMiddleware)
-}
-
-module.exports = {
-    verifyAndSaveUserMiddleware,
-}
+module.exports = verifyUserMiddleware

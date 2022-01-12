@@ -8,10 +8,11 @@ const {
     crusadeMiddleware,
     heartMiddleware,
     dutyScaleScene,
+    protocolosCovidScene
+
 } = require('./middlewares')
-const {
-    verifyAndSaveUserMiddleware,
-} = require('./middlewares/verifyAndSaveUserMiddleware')
+const verifyUserMiddleware = require('./middlewares/verifyUserMiddleware')
+const {getUserContactMiddleware} = require('./middlewares/getUserContactMiddleware')
 
 const {
     TELEGRAM_TOKEN
@@ -19,19 +20,24 @@ const {
 
 const bot = new Telegraf(TELEGRAM_TOKEN)
 const { enter } = Stage
-const k = new KeyboardFromArray(['escala'], 3)
-const k1 = new KeyboardFromArray(['escala', 'voltar'], 3)
+const k = new KeyboardFromArray(['escala','protocolos_covid'], 1)
+//const k1 = new KeyboardFromArray(['escala', 'voltar'], 3)
 
-const stage = new Stage([dutyScaleScene])
+const stage = new Stage([dutyScaleScene,protocolosCovidScene])
 bot.use(session())
 bot.use(stage.middleware())
-//bot.use(verifyAndSaveUserMiddleware)
+bot.use(getUserContactMiddleware)
+bot.use(verifyUserMiddleware)
 
 const commands = [
     {
         command: 'escalas',
-        callBack: enter('dutyScaleScene'),
+        callBack: enter('dutyScaleScene')
     },
+    {
+        command: 'protocolos_covid',
+        callBack: enter('protocolosCovidScene')
+    }
 ]
 
 commands.forEach(({ command, callBack }) => {
@@ -41,8 +47,12 @@ commands.forEach(({ command, callBack }) => {
 const actions = [
     {
         action: 'escala',
-        callback: enter('dutyScaleScene'),
+        callback: enter('dutyScaleScene')
     },
+    {
+        action: 'protocolos_covid',
+        callback: enter('protocolosCovidScene')
+    }
 ]
 
 actions.forEach(({ action, callback }) => {
