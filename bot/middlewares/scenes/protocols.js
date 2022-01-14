@@ -2,13 +2,12 @@ const Scene = require('telegraf/scenes/base')
 const getCommandsAndActionsObject  = require('../../services/protocolosServices/object')
 const getCorrectKeyboard = require('../../services/protocolosServices/keyboards')
 const protocolsScene = new Scene('protocolsScene')
-const db = require('../../services/protocolosServices/database')
+const getMainScene = require('../../services/protocolosServices/callbacks')
+
 
 const commandsAndActions = getCommandsAndActionsObject()
 
-const getMainScene = (ctx)=>{
-    const text = db().reduce((acc,item)=>`${acc}/${item.action}\n`,'Escolha umas das opções abaixo: \n')
-    ctx.reply(text,getCorrectKeyboard("regular"))}
+
 
 protocolsScene.enter(getMainScene)
 protocolsScene.leave((ctx) =>

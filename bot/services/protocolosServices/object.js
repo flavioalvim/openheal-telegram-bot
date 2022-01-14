@@ -2,6 +2,7 @@ const stage = require('telegraf/stage')
 const { leave } = stage
 const db = require('./database')
 const getCorrectKeyboard = require('./keyboards')
+const getMainScene = require('./callbacks')
 
 const getCommandsAndActionsObject = () => [...getRegularObject(db()), ...getExtraObject()]
 
@@ -22,13 +23,9 @@ const getExtraObject = () => {
         [
             {
                 "command":"Voltar",
-                commandCallback: (ctx)=>{
-                    const text = db().reduce((acc,item)=>`${acc}/${item.action}\n`,'Escolha umas das opções abaixo: \n')
-                    ctx.reply(text,getCorrectKeyboard("regular"))},
-                "action": "Voltar",
-                actionCallback: (ctx)=>{
-                    const text = db().reduce((acc,item)=>`${acc}/${item.action}\n`,'Escolha umas das opções abaixo: \n')
-                    ctx.reply(text,getCorrectKeyboard("regular"))}
+                commandCallback: getMainScene,
+                "action": "retornar",
+                actionCallback: getMainScene
             },
             {
                 "command":"voltar_ao_menu_principal",
