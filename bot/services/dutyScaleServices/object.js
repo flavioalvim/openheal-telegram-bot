@@ -45,9 +45,9 @@ const getCommandsAndActionsObject = () => {
 
     const getExtraObject = () => [
         {
-            command: 'sair',
+            command: 'voltar_ao_menu_principal',
             commandCallback: leave(),
-            action: 'sair',
+            action: 'voltar_ao_menu_principal',
             actionCallback: leave(),
         },
         {
@@ -63,6 +63,7 @@ const getCommandsAndActionsObject = () => {
         ...getScaleObject(),
         ...getExtraObject(),
     ]
+
     return commandsAndActions
 }
 

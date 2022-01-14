@@ -8,7 +8,7 @@ const {
     crusadeMiddleware,
     heartMiddleware,
     dutyScaleScene,
-    protocolosCovidScene
+    protocolsScene
 
 } = require('./middlewares')
 const verifyUserMiddleware = require('./middlewares/verifyUserMiddleware')
@@ -20,14 +20,15 @@ const {
 
 const bot = new Telegraf(TELEGRAM_TOKEN)
 const { enter } = Stage
-const k = new KeyboardFromArray(['escala','protocolos_covid'], 1)
+const k = new KeyboardFromArray(['escala','protocolos'], 1)
 //const k1 = new KeyboardFromArray(['escala', 'voltar'], 3)
 
-const stage = new Stage([dutyScaleScene,protocolosCovidScene])
+const stage = new Stage([dutyScaleScene,protocolsScene])
 bot.use(session())
 bot.use(stage.middleware())
 bot.use(getUserContactMiddleware)
 bot.use(verifyUserMiddleware)
+
 
 const commands = [
     {
@@ -35,8 +36,8 @@ const commands = [
         callBack: enter('dutyScaleScene')
     },
     {
-        command: 'protocolos_covid',
-        callBack: enter('protocolosCovidScene')
+        command: 'protocolos',
+        callBack: enter('protocolsScene')
     }
 ]
 
@@ -50,8 +51,8 @@ const actions = [
         callback: enter('dutyScaleScene')
     },
     {
-        action: 'protocolos_covid',
-        callback: enter('protocolosCovidScene')
+        action: 'protocolos',
+        callback: enter('protocolsScene')
     }
 ]
 
@@ -74,5 +75,6 @@ bot.on('text', async (ctx, next) => {
     //console.log(ctx)
     ctx.reply(finalText, k)
 })
+
 
 bot.startPolling()
