@@ -48,7 +48,7 @@ const getScaleCallback = (filename) => (ctx) => {
         const mdFile = fs
             .readFileSync(__dirname + '/mdFiles/' + `${filename}.md`)
             .toString()
-        console.log(mdFile)
+
         ctx.replyWithMarkdown(mdFile, getCorrectKeyboard('return'))
     } catch {
         ctx.reply(

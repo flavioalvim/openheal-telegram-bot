@@ -15,7 +15,6 @@ const verifyUserMiddleware = (ctx, next) => {
     if (sameIdMsg || sameIdCallback) {
         next()
     } else {
-        console.log('verified')
         ctx.toSave = ctx.update.message.from || ctx.update.callback_query.from
         ctx.reply(
             'Desculpa mas esse usuario não está autorizado! Contacte o administrador...'
