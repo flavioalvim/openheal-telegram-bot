@@ -1,17 +1,17 @@
 const Scene = require('telegraf/scenes/base')
+const { mainMenuOptions } = require('../../components/mainMenu')
 const { getMainScene } = require('../../services/dutyScaleServices')
 const {
     getCommandsAndActionsObject,
 } = require('../../services/dutyScaleServices/object')
+
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene
 
 const commandsAndActions = getCommandsAndActionsObject()
 
 dutyScaleScene.enter(getMainScene)
-dutyScaleScene.leave((ctx) =>
-    ctx.reply('Saindo do mudulo escala. Digite algo para novas opções')
-)
+dutyScaleScene.leave(mainMenuOptions)
 
 commandsAndActions.forEach(
     ({ action, command, commandCallback, actionCallback }) => {

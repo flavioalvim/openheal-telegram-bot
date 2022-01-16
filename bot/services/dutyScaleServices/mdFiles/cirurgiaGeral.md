@@ -26,30 +26,30 @@
 
 *Dr.Luiz Fernando Saboya*
 01 de Janeiro
-De 23 à 29 de Janeiro
-De 20 à 26 de Fevereiro
-De 20 à 26 de Março
-De 17 à 23 de Abril
+De 23 a 29 de Janeiro
+De 20 a 26 de Fevereiro
+De 20 a 26 de Março
+De 17 a 23 de Abril
 
 
 *Dr.Mauricio Emmanuel*
-De 02 à 08 de Janeiro
-De 30 à 5 de Fevereiro
-De 27 de Fevereiro à 05 de Março
-De 27 de Março à 02 de Abril
+De 02 a 08 de Janeiro
+De 30 a 5 de Fevereiro
+De 27 de Fevereiro a 05 de Março
+De 27 de Março a 02 de Abril
 De 24 a 30 de Abril
 
 *Dr. Gerson Freitas*
-De 09 à 15 de Janeiro
-De 06 à 12 de Fevereiro
-De 06 à 12 de Março
-De 03 à 09 de Abril
+De 09 a 15 de Janeiro
+De 06 a 12 de Fevereiro
+De 06 a 12 de Março
+De 03 a 09 de Abril
 De 01 a 07 de Maio
 
 *Dr. Leonardo Ferraz*
-De 16 à 22 de Janeiro
-De 13 à 19 de Fevereiro
-De 13 à 19 de Março
-De 10 à 16 de Abril
-De 08 à 14 de Maio
+De 16 a 22 de Janeiro
+De 13 a 19 de Fevereiro
+De 13 a 19 de Março
+De 10 a 16 de Abril
+De 08 a 14 de Maio
 

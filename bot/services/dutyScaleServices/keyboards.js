@@ -4,7 +4,7 @@ const { getSpecialtiesArray } = require('./utils')
 const {modifyString} = require('../../components/utils')
 
 const getCorrectKeyboard = (option, specialty) => {
-    const buttons = [...getSpecialtiesArray(), 'sair'] // Array of Objects
+    const buttons = [...getSpecialtiesArray(), 'Voltar ao menu principal'] // Array of Objects
     const regularKeyboard = new KeyboardFromArray(buttons) //Keboard
     const returnKeyboard = new KeyboardFromArray(['Voltar'])
 
