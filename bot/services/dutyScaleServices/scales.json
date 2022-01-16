@@ -1236,5 +1236,13 @@
       }
     ],
     "scaleMdFile": "hemodinamica"
+  },
+  {
+    "specialty": "teste",
+    "professionals": [],
+    "subSpecialties": [],
+    "teamProfessionals": [],
+    "id": 1,
+    "scaleMdFile": "hemodinamica"
   }
 ]
