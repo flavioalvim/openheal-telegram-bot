@@ -1,8 +1,9 @@
+const rfr =require('rfr')
 const Scene = require('telegraf/scenes/base')
-const getCommandsAndActionsObject  = require('../../services/protocolsServices/object')
+const getCommandsAndActionsObject  = rfr('bot/modules/protocolsServices/object')
 //const getCorrectKeyboard = require('../../services/protocolsServices/keyboards')
 const protocolsScene = new Scene('protocolsScene')
-const getMainScene = require('../../services/protocolsServices/callbacks')
+const getMainScene = rfr('bot/modules/protocolsServices/callbacks')
 const  {mainMenuOptions} =require('../../components/mainMenu')
 
 const commandsAndActions = getCommandsAndActionsObject()

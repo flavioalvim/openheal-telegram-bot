@@ -1,10 +1,13 @@
 const fs = require('fs')
-const dir = __dirname + '/mdFiles';
+const rfr = require('rfr')
+const dir = 'bot/data/protocols/mdFiles'
+console.log(dir)
+//const dir = __dirname + '/mdFiles';
 const _ = require('lodash')
 
 
 
-const fileContent = (fileName) =>  fs.readFileSync(__dirname + `/mdFiles/${fileName}`).toString()
+const fileContent = (fileName) =>  fs.readFileSync(`${dir}/${fileName}`).toString()
 
 const upperCaseAndRemoveUnder = (string) => {
     const newString = _.capitalize(string)
@@ -23,9 +26,9 @@ const db = () => {
         return(
         files.map(filename => ({
             filename,
-            "text": upperCaseAndRemoveUnder(filename),
-            "action": removeExtension(filename),
-            "content": fileContent(filename)
+            text: upperCaseAndRemoveUnder(filename),
+            action: removeExtension(filename),
+            content: () => fileContent(filename)
         })))
     }
 }

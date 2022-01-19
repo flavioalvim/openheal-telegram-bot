@@ -1,5 +1,11 @@
 const { flatMap, uniqBy, flatten } = require('lodash')
-const db = require('./scales.json')
+const rfr = require('rfr')
+const db = rfr('bot/data/dutyScale/scales.json')
+//const db = require('../../data/dutyScale/scales.json')
+//const db = require(path.resolve('/data/dutyScale'))
+
+
+//const db = require('./scales.json')
 
 module.exports = {
     db: () => db,

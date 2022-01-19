@@ -1,7 +1,8 @@
+const rfr = require('rfr')
 const { getSpecialties, getSubspecialties } = require('./database')
-const { KeyboardFromArray, Keyboard } = require('../../components/keyboard')
-const { getSpecialtiesArray } = require('./utils')
-const {modifyString} = require('../../components/utils')
+const { KeyboardFromArray, Keyboard } = require('../../../components/keyboard')
+const { getSpecialtiesArray } = require('../dutyScaleServices/utils')
+const {modifyString} = require('../../../components/utils')
 
 const getCorrectKeyboard = (option, specialty) => {
     const buttons = [...getSpecialtiesArray(), 'Voltar ao menu principal'] // Array of Objects
@@ -47,7 +48,16 @@ const getCorrectKeyboard = (option, specialty) => {
         seeScale: seeSpecialtyScaleKeyboard,
         return: returnKeyboard,
         seeSubScale: seeSubScaleKeyboard,
-        customKeyboard: (buttons) => new KeyboardFromArray(buttons)
+        customKeyboard: (buttons, mustShowScale = false) => {
+            const btns = buttons.map(btn => !mustShowScale ? btn : ({
+                text: `Ver escala - ${btn}`,
+                action: `escala_${modifyString(btn)}`
+            }))
+            return new KeyboardFromArray([
+                ...btns,
+                { text: 'Voltar', action: 'Voltar' }
+            ])
+        }
     }
 
     return keyboardOptions[option]

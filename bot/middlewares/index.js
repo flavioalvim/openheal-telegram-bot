@@ -1,7 +1,8 @@
+const rfr = require('rfr')
 const graceMiddleware = require('./graceMiddleware')
 const crusadeMiddleware = require('./crusadeMiddleware')
 const heartMiddleware = require('./heartMiddleware')
-const { dutyScaleScene } = require('./scenes/dutyScale')
+const { dutyScaleScene } = rfr('bot/modules/dutyScale/scene/dutyScale')
 const { protocolsScene } = require('./scenes/protocols')
 
 module.exports = {

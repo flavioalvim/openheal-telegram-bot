@@ -1,9 +1,10 @@
+const rfr = require('rfr')
 const Scene = require('telegraf/scenes/base')
-const { mainMenuOptions } = require('../../components/mainMenu')
-const { getMainScene } = require('../../services/dutyScaleServices')
+const { mainMenuOptions } = require('../../../components/mainMenu')
+const { getMainScene } = rfr('bot/modules/dutyScale/dutyScaleServices')
 const {
     getCommandsAndActionsObject,
-} = require('../../services/dutyScaleServices/object')
+} = rfr('bot/modules/dutyScale/dutyScaleServices/object')
 
 
 const dutyScaleScene = new Scene('dutyScaleScene') //Scene

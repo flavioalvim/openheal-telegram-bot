@@ -2,12 +2,15 @@ const { db } = require('./database')
 const getCorrectKeyboard = require('./keyboards')
 const { getMarkdownTextFromPhonesBySpecialty, getAllPhones } = require('./utils')
 const fs = require('fs')
+const rfr = require ('rfr')
 
 const getMainScene = (ctx) =>
     ctx.reply(getSpecialtiesText(), getCorrectKeyboard('regular'))
 
 const getCommonCallback = (specialty) => async (ctx) => {
     const { message, buttons } = getAllPhones(specialty)
+
+    const isMainSpecialty = db().some(item => item.specialty === specialty)
 
     const customButton = getCorrectKeyboard('customKeyboard', specialty)
 
@@ -16,10 +19,7 @@ const getCommonCallback = (specialty) => async (ctx) => {
         buttons.length === 1 ? getCorrectKeyboard(
             buttons[0] === specialty ? 'seeScale' : 'seeSubScale',
             buttons[0]
-        ) : customButton([
-            ...buttons, 
-            'voltar'
-        ])
+        ) : customButton(buttons, !isMainSpecialty) 
     )
 }
 
@@ -42,15 +42,15 @@ const getSpecialtiesText = () => {
         )
 } //String
 
+
 //Acertar se o arquivo nao existir
 const getScaleCallback = (filename) => (ctx) => {
     try {
         const mdFile = fs
-            .readFileSync(__dirname + '/mdFiles/' + `${filename}.md`)
-            .toString()
+            .readFileSync(`${__dirname}/../../../data/dutyScale/mdFiles/${filename}.md`, { encoding: 'utf-8' })
 
         ctx.replyWithMarkdown(mdFile, getCorrectKeyboard('return'))
-    } catch {
+    } catch(error) {
         ctx.reply(
             'Não há escala para essa especialidade.',
             getCorrectKeyboard('return')

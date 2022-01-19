@@ -5,7 +5,7 @@ const {
     getMainScene,
     getScaleCallback,
 } = require('./callbackTexts')
-const { modifyString } = require('../../components/utils')
+const { modifyString } = require('../../../components/utils')
 
 const { leave } = stage
 
