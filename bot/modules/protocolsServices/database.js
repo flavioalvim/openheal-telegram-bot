@@ -11,7 +11,7 @@ const fileContent = (fileName) =>  fs.readFileSync(`${dir}/${fileName}`).toStrin
 
 const upperCaseAndRemoveUnder = (string) => {
     const newString = _.capitalize(string)
-        .replaceAll("_", " ")
+        .replace(/_/g, " ")
         .trim()
         .replace(/\.[^/.]+$/, "")
 

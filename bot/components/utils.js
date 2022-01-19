@@ -3,7 +3,7 @@ class Utils {
         if(string){
         const newString = string
             .toString()
-            .replaceAll(' ', '_')
+            .replace(/ /g, '_')
             .toLowerCase()
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
