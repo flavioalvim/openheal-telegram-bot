@@ -2,7 +2,6 @@ require('dotenv').config()
 const Telegraf = require('telegraf')
 const Stage = require('telegraf/stage')
 const session = require('telegraf/session')
-// const { KeyboardFromArray } = require('./components/keyboard')
 const {
     dutyScaleScene,
     protocolsScene
@@ -17,8 +16,6 @@ const {
 } = process.env
 
 const bot = new Telegraf(TELEGRAM_TOKEN)
-
-
 const stage = new Stage([dutyScaleScene,protocolsScene])
 bot.use(session())
 bot.use(stage.middleware())
