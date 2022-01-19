@@ -1,11 +1,12 @@
 const fs = require('fs')
 const mustache = require('mustache')
+const dir = 'bot/modules/dutyScale/layouts'
 
 /**
  * Ler o template do markdown
  */
 const loadMarkdownFile = (fileName) => {
-    const file = `${__dirname}/../../../layouts/${fileName}.md`
+    const file = `${dir}/${fileName}.md`
     return fs.readFileSync(file, 'utf8')
 }
 

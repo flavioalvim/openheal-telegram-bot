@@ -1,21 +1,14 @@
+const rfr = require('rfr')
 const graceMiddleware = require('./graceMiddleware')
 const crusadeMiddleware = require('./crusadeMiddleware')
 const heartMiddleware = require('./heartMiddleware')
-const { dutyScaleScene } = require('./scenes/dutyScale')
-<<<<<<< Updated upstream
-const { protocolosCovidScene } = require('./scenes/protocolosCovidScene')
-=======
+const { dutyScaleScene } = rfr('bot/modules/dutyScale/scene/dutyScale')
 const { protocolsScene } = require('./scenes/protocols')
->>>>>>> Stashed changes
 
 module.exports = {
     graceMiddleware,
     crusadeMiddleware,
     heartMiddleware,
     dutyScaleScene,
-<<<<<<< Updated upstream
-    protocolosCovidScene
-=======
     protocolsScene
->>>>>>> Stashed changes
 }

@@ -1,14 +1,8 @@
 const { db } = require('./database')
 const getCorrectKeyboard = require('./keyboards')
-<<<<<<< Updated upstream
-const {
-    getMarkdownTextFromPhonesBySpecialty,
-    getAllPhones,
-} = require('./utils')
-=======
 const { getMarkdownTextFromPhonesBySpecialty, getAllPhones } = require('./utils')
->>>>>>> Stashed changes
 const fs = require('fs')
+const rfr = require ('rfr')
 
 const getMainScene = (ctx) =>
     ctx.reply(getSpecialtiesText(), getCorrectKeyboard('regular'))
@@ -16,26 +10,16 @@ const getMainScene = (ctx) =>
 const getCommonCallback = (specialty) => async (ctx) => {
     const { message, buttons } = getAllPhones(specialty)
 
+    const isMainSpecialty = db().some(item => item.specialty === specialty)
+
     const customButton = getCorrectKeyboard('customKeyboard', specialty)
 
     await ctx.replyWithMarkdown(
         message,
-<<<<<<< Updated upstream
-        buttons.length === 1
-            ? getCorrectKeyboard(
-                  buttons[0] === specialty ? 'seeScale' : 'seeSubScale',
-                  buttons[0]
-              )
-            : customButton([...buttons, 'voltar'])
-=======
         buttons.length === 1 ? getCorrectKeyboard(
             buttons[0] === specialty ? 'seeScale' : 'seeSubScale',
             buttons[0]
-        ) : customButton([
-            ...buttons, 
-            'voltar'
-        ])
->>>>>>> Stashed changes
+        ) : customButton(buttons, !isMainSpecialty) 
     )
 }
 
@@ -58,23 +42,15 @@ const getSpecialtiesText = () => {
         )
 } //String
 
+
 //Acertar se o arquivo nao existir
 const getScaleCallback = (filename) => (ctx) => {
     try {
-<<<<<<< Updated upstream
-        const mdFile = fs.readFileSync(
-            `${__dirname}/mdFiles/${filename}.md`,
-            'utf-8'
-        )
-        console.log(mdFile)
-=======
         const mdFile = fs
-            .readFileSync(__dirname + '/mdFiles/' + `${filename}.md`)
-            .toString()
+            .readFileSync(`${__dirname}/../../../data/dutyScale/mdFiles/${filename}.md`, { encoding: 'utf-8' })
 
->>>>>>> Stashed changes
         ctx.replyWithMarkdown(mdFile, getCorrectKeyboard('return'))
-    } catch {
+    } catch(error) {
         ctx.reply(
             'Não há escala para essa especialidade.',
             getCorrectKeyboard('return')

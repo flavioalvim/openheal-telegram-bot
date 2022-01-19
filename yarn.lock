@@ -628,6 +628,11 @@
   dependencies:
     "lowercase-keys" "^1.0.0"
 
+"rfr@^1.2.3":
+  "integrity" "sha1-57txkzft6XcJH68S6si2zS26kBE="
+  "resolved" "https://registry.npmjs.org/rfr/-/rfr-1.2.3.tgz"
+  "version" "1.2.3"
+
 "sandwich-stream@^2.0.1":
   "integrity" "sha512-jLYV0DORrzY3xaz/S9ydJL6Iz7essZeAfnAavsJ+zsJGZ1MOnsS52yRjU3uF3pJa/lla7+wisp//fxOwOH8SKQ=="
   "resolved" "https://registry.npmjs.org/sandwich-stream/-/sandwich-stream-2.0.2.tgz"

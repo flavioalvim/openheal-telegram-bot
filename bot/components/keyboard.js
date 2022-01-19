@@ -28,7 +28,8 @@ class Keyboard {
 
 class KeyboardFromArray {
     constructor(array, columns = 1) {
-        this.buttons_obj = array.map((item) => ({ text: item, action: item }))
+        this.buttons_obj = array
+            .map((item) => typeof(item) !== 'string' ? item : ({ text: item, action: item }))
         this.columns = columns
 
         return new Keyboard(this.buttons_obj, this.columns)
