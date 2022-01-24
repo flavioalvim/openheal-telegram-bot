@@ -20,7 +20,7 @@ const stage = new Stage([dutyScaleScene,protocolsScene])
 bot.use(session())
 bot.use(stage.middleware())
 bot.use(getUserContactMiddleware)
-//bot.use(verifyUserMiddleware)
+bot.use(verifyUserMiddleware)
 
 
 commands.forEach(({ command, callBack }) => {
